@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/*
+  Palette is taken from the brand marks in public/media/brand/: a forest→sage
+  gradient ground with cream type sitting on top. #69895a and #f0f2ed are the
+  two brand constants; the forest and sage ramps are extensions of them so
+  dark sections still read as "the green", never as neutral charcoal.
+*/
+@theme {
+  --color-cream: #f0f2ed;
+  --color-cream-dim: #d9ded2;
+
+  --color-sage: #69895a;
+  --color-sage-light: #8aa87c;
+  --color-sage-dark: #55714a;
+
+  --color-forest-900: #10170e;
+  --color-forest-800: #172013;
+  --color-forest-700: #1f2c1a;
+  --color-forest-600: #2b3b24;
+
+  --font-display: var(--font-bodoni), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--font-parisienne), cursive;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Fixed navbar would otherwise cover the top of each anchored section. */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-forest-900);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-sage);
+    color: var(--color-cream);
+  }
+
+  /* The brand's photography and logo lockups are heavily grained; matching it
+     in the UI keeps rendered sections from looking flatter than the stills. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.22;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hides the scrollbar on the horizontally-scrolled work rail without
+     disabling the scrolling itself. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

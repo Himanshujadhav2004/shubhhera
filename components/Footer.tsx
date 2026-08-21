@@ -1,0 +1,105 @@
+"use client";
+
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { AnimatePresence } from "motion/react";
+import { useState } from "react";
+import { navLinks, site } from "@/data/content";
+
+export default function Footer() {
+  const [showTop, setShowTop] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (y) => setShowTop(y > 700));
+
+  return (
+    <>
+      <footer className="grain relative border-t border-cream/10 bg-forest-900 py-16">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
+            <div>
+              <p className="font-display text-2xl tracking-[0.2em] text-cream">
+                {site.wordmark.primary}
+              </p>
+              <p className="mt-1.5 text-[0.6rem] tracking-[0.4em] text-sage-light">
+                {site.wordmark.secondary}
+              </p>
+              <p className="mt-6 max-w-xs text-sm leading-relaxed text-cream-dim">
+                {site.tagline}
+              </p>
+            </div>
+
+            <nav aria-label="Footer">
+              <ul className="grid grid-cols-2 gap-x-12 gap-y-3 sm:grid-cols-3 lg:grid-cols-2">
+                {navLinks.map(({ label, href }) => (
+                  <li key={href}>
+                    <a
+                      href={href}
+                      className="text-sm text-cream-dim transition-colors hover:text-cream"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div>
+              <p className="text-xs uppercase tracking-[0.25em] text-sage-light">Follow</p>
+              <div className="mt-4 flex flex-col gap-2.5">
+                {site.socials.map(({ label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm text-cream-dim transition-colors hover:text-cream"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </div>
+              <a
+                href={`mailto:${site.email}`}
+                className="mt-6 block text-sm text-cream-dim transition-colors hover:text-cream"
+              >
+                {site.email}
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-14 flex flex-col gap-3 border-t border-cream/10 pt-8 text-xs text-cream-dim/60 sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
+            </p>
+            <p>Wedding cinematography · Photo &amp; video editing</p>
+          </div>
+        </div>
+      </footer>
+
+      <AnimatePresence>
+        {showTop && (
+          <motion.a
+            href="#top"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            whileHover={{ y: -3 }}
+            transition={{ duration: 0.3 }}
+            aria-label="Back to top"
+            className="fixed bottom-7 right-7 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-cream/25 bg-forest-900/85 text-cream backdrop-blur-sm transition-colors hover:border-sage-light hover:bg-sage/25"
+          >
+            <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden>
+              <path
+                d="M12 19V5M5 12l7-7 7 7"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </motion.a>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

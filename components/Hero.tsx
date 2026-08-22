@@ -4,8 +4,13 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { site } from "@/data/content";
+import { toEmbedUrl } from "@/lib/video";
 
 export default function Hero() {
+  // A path into public/ gets a real <video>; anything else is a platform embed.
+  const isLocalVideo = site.heroVideo.startsWith("/");
+  const isEmbedVideo = site.heroVideo.length > 0 && !isLocalVideo;
+
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -24,17 +29,72 @@ export default function Hero() {
       className="grain relative flex h-svh min-h-[640px] items-center justify-center overflow-hidden"
     >
       <motion.div style={{ y: imageY }} className="absolute inset-0 -z-10 scale-110">
+        {/* Still sits underneath the film: it paints instantly, covers the
+            iframe's load, and is what remains if Drive fails or is blocked. */}
         <Image
-          src="/media/wedding/wedding-09.jpg"
+          src={site.heroPoster}
           alt="Cinematic wedding still by Stories by Shubhh.era"
           fill
           priority
           sizes="100vw"
           className="object-cover"
         />
+
+        {/*
+          The still stays painted underneath and the film fades in over it, so
+          a slow start (or a browser that blocks autoplay) degrades to the
+          photograph instead of to a black panel.
+        */}
+        {isLocalVideo && (
+          <motion.video
+            src={site.heroVideo}
+            poster={site.heroPoster}
+            autoPlay
+            /* `muted` + `playsInline` are what actually permit autoplay; without
+               both, the video silently sits on its first frame. */
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+            tabIndex={-1}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.3 }}
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          />
+        )}
+
+        {isEmbedVideo && (
+          <div className="absolute inset-0 overflow-hidden">
+            {/*
+              YouTube's player is a fixed 16:9 surface carrying a title bar and
+              a control strip that no parameter removes. Sizing it to the larger
+              of 16:9-by-width or 16:9-by-height reproduces object-cover, and
+              the extra scale pushes that chrome outside the crop.
+              pointer-events-none keeps it from swallowing clicks meant for the
+              hero's buttons.
+            */}
+            <motion.iframe
+              src={toEmbedUrl(site.heroVideo, { background: true })}
+              title="Showreel — Stories by Shubhh.era"
+              allow="autoplay; encrypted-media"
+              referrerPolicy="strict-origin-when-cross-origin"
+              tabIndex={-1}
+              aria-hidden="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              /* Held back briefly so the poster covers the player's black
+                 first paint rather than the reader seeing it flash. */
+              transition={{ duration: 1.2, delay: 1.1 }}
+              className="pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-full w-[177.78vh] min-w-full -translate-x-1/2 -translate-y-1/2 scale-[1.45] border-0"
+            />
+          </div>
+        )}
+
         {/* Dual wash: a vertical fade for type legibility, plus a green cast so
-            the photography sits inside the brand rather than beside it. Kept
-            light enough that the photograph still reads as a photograph. */}
+            the footage sits inside the brand rather than beside it. Kept
+            light enough that the picture still reads as a picture. */}
         <div className="absolute inset-0 bg-gradient-to-b from-forest-900/70 via-forest-900/45 to-forest-900" />
         <div className="absolute inset-0 bg-forest-800/25 mix-blend-color" />
       </motion.div>

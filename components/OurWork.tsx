@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { films, type Film } from "@/data/content";
+import { toEmbedUrl } from "@/lib/video";
 import { Eyebrow, RevealGroup, fadeUp } from "@/components/ui/Reveal";
 
 function FilmRow({
@@ -162,7 +163,7 @@ export default function OurWork() {
               className="aspect-video w-full max-w-5xl overflow-hidden rounded-sm bg-black"
             >
               <iframe
-                src={playing.embedUrl}
+                src={toEmbedUrl(playing.embedUrl)}
                 title={`${playing.title} — ${playing.couple}`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

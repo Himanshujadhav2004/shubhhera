@@ -10,6 +10,20 @@ export const site = {
   name: "Stories by Shubhh.era",
   wordmark: { primary: "STORIES", secondary: "BY SHUBHH ERA" },
   tagline: "We transform your most precious moments into cinematic masterpieces.",
+  /**
+   * Hero background film. Two forms are supported:
+   *
+   *  - A YouTube link or id  → embedded muted, looping, chrome cropped.
+   *  - A local path like "/media/hero-reel.mp4" → plain <video>, which is the
+   *    cleaner result: no platform branding at all, and it starts faster.
+   *
+   * If you later export a 5-10MB loop (720p/1080p H.264, 10-20s, no audio),
+   * drop it in public/media/ and point this at it — nothing else changes.
+   *
+   * Set to "" to show heroPoster alone, which is a fine hero on its own.
+   */
+  heroVideo: "https://youtu.be/_2LesVoGjwM",
+  heroPoster: "/media/wedding/wedding-09.jpg",
   intro:
     "Over 3+ years of dedicated experience in wedding cinematography and post-production — because every story deserves to be told beautifully.",
   email: "hello@shubhhera.com",
@@ -228,11 +242,20 @@ export const galleryFilters: readonly ("All" | GalleryCategory)[] = [
 /* ------------------------------------------------------------- Our Work -- */
 
 /**
- * `embedUrl` takes a YouTube or Vimeo *embed* link, e.g.
- *   https://www.youtube.com/embed/VIDEO_ID
- *   https://player.vimeo.com/video/VIDEO_ID
- * Leave it empty and the card still renders — it just shows the still without
- * a play affordance, so the site stays correct until the films are uploaded.
+ * `embedUrl` accepts the link you actually have in hand — no need to build an
+ * embed URL by hand. All of these work:
+ *
+ *   https://www.youtube.com/watch?v=VIDEO_ID     (address bar)
+ *   https://youtu.be/VIDEO_ID                    (share button)
+ *   VIDEO_ID                                     (just the 11-char id)
+ *   https://vimeo.com/123456789
+ *   https://player.mediadelivery.net/embed/...   (Bunny, or any embed URL)
+ *
+ * lib/video.ts normalizes it. Upload films to YouTube as **Unlisted** — they
+ * stay off your channel and out of search, but still embed here.
+ *
+ * Leave it empty and the card still renders: it shows the still without a play
+ * affordance, so the site stays correct until the films are up.
  */
 export type Film = {
   title: string;

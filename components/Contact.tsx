@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { site } from "@/data/content";
 import { Eyebrow, Reveal, RevealGroup, fadeUp } from "@/components/ui/Reveal";
+import SocialIcon from "@/components/ui/SocialIcon";
 
 type Status = "idle" | "sending" | "sent";
 
@@ -73,17 +74,19 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-xs uppercase tracking-[0.25em] text-sage">Follow</p>
-                <div className="mt-3 flex gap-4">
+                <div className="mt-3 flex gap-3">
                   {site.socials.map(({ label, href }) => (
                     <a
                       key={label}
                       href={href}
                       target="_blank"
                       rel="noreferrer"
-                      className="group inline-flex items-center gap-2 text-ink transition-colors hover:text-sage"
+                      /* Icon-only, so the accessible name comes from aria-label. */
+                      aria-label={label}
+                      title={label}
+                      className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink transition-all duration-300 hover:border-ink hover:bg-ink hover:text-paper"
                     >
-                      {label}
-                      <span className="block h-px w-6 bg-current opacity-40 transition-all duration-400 group-hover:w-9 group-hover:opacity-100" />
+                      <SocialIcon name={label} />
                     </a>
                   ))}
                 </div>

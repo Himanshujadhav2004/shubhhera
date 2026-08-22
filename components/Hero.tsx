@@ -30,7 +30,8 @@ export default function Hero() {
     >
       <motion.div style={{ y: imageY }} className="absolute inset-0 -z-10 scale-110">
         {/* Still sits underneath the film: it paints instantly, covers the
-            iframe's load, and is what remains if Drive fails or is blocked. */}
+            film's first frames while it buffers, and is what remains if the
+            video fails to load or autoplay is blocked. */}
         <Image
           src={site.heroPoster}
           alt="Cinematic wedding still by Stories by Shubhh.era"
@@ -92,11 +93,10 @@ export default function Hero() {
           </div>
         )}
 
-        {/* Dual wash: a vertical fade for type legibility, plus a green cast so
-            the footage sits inside the brand rather than beside it. Kept
-            light enough that the picture still reads as a picture. */}
-        <div className="absolute inset-0 bg-gradient-to-b from-forest-900/70 via-forest-900/45 to-forest-900" />
-        <div className="absolute inset-0 bg-forest-800/25 mix-blend-color" />
+        {/* Neutral black scrim only — no colour cast. It exists purely so the
+            cream type holds contrast over moving footage; the film keeps its
+            own grade rather than being pushed toward the brand green. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/30 to-black/80" />
       </motion.div>
 
       <motion.div
@@ -107,7 +107,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-script text-2xl text-sage-light sm:text-3xl"
+          className="font-script text-2xl text-cream/85 sm:text-3xl"
         >
           Every story deserves
         </motion.p>
@@ -159,7 +159,7 @@ export default function Hero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 380, damping: 22 }}
-            className="w-full rounded-full bg-cream px-9 py-4 text-xs uppercase tracking-[0.25em] text-forest-900 sm:w-auto"
+            className="w-full rounded-full bg-cream px-9 py-4 text-xs uppercase tracking-[0.25em] text-neutral-900 sm:w-auto"
           >
             View Our Work
           </motion.a>
@@ -190,7 +190,7 @@ export default function Hero() {
           <motion.span
             animate={{ y: ["-100%", "100%"] }}
             transition={{ duration: 1.9, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-x-0 h-1/2 bg-sage-light"
+            className="absolute inset-x-0 h-1/2 bg-cream"
           />
         </span>
       </motion.a>

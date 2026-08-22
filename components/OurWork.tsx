@@ -149,7 +149,16 @@ export default function OurWork() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setPlaying(null)}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/92 backdrop-blur-sm sm:p-8"
+            /*
+              forest-900, not ink: `ink` is the theme's green-black and at 92%
+              the paper page bleeds through it into a murky olive. A film needs
+              a near-solid dark ground to read against.
+
+              On phones the block is pinned near the top rather than centred —
+              a 16:9 film is only ~220px tall in portrait, and centring it left
+              it stranded between two fields of empty backdrop.
+            */
+            className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-forest-900/97 pt-20 backdrop-blur-sm sm:items-center sm:p-8 sm:pt-8"
             role="dialog"
             aria-modal="true"
             aria-label={`${playing.title} — ${playing.couple}`}
@@ -192,13 +201,30 @@ export default function OurWork() {
                 <p className="mt-4 max-w-md text-sm leading-relaxed text-paper/70 sm:hidden">
                   {playing.description}
                 </p>
+
+                {/* Portrait phones cap a 16:9 film at roughly a fifth of the
+                    screen; the player's own fullscreen control is the only way
+                    to make it bigger, so point at it rather than leave the
+                    viewer assuming this small is all there is. */}
+                <p className="mt-6 flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-paper/45 sm:hidden">
+                  <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5" aria-hidden>
+                    <path
+                      d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  Tap fullscreen in the player for a larger view
+                </p>
               </div>
             </motion.div>
 
             <button
               onClick={() => setPlaying(null)}
               /* Sized to a comfortable thumb target rather than a bare glyph. */
-              className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-ink/70 text-3xl leading-none text-paper backdrop-blur-sm transition-opacity hover:opacity-60 sm:right-5 sm:top-5 sm:bg-transparent"
+              className="fixed right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-forest-900/70 text-3xl leading-none text-paper backdrop-blur-sm transition-opacity hover:opacity-60 sm:absolute sm:right-5 sm:top-5 sm:bg-transparent"
               aria-label="Close video"
             >
               &times;

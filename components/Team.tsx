@@ -29,27 +29,31 @@ export default function Team() {
           staggerChildren={0.12}
         >
           {team.map((member) => (
-            <motion.article key={member.name} variants={fadeUp} className="group">
-              <div className="grain relative aspect-4/5 overflow-hidden rounded-sm">
+            <motion.article key={member.name} variants={fadeUp}>
+              {/*
+                The studio's "Introducing" card shown whole and unaltered: its
+                own proportions, no crop box, no object-cover, no hover zoom,
+                no tint. The name, role and bio are part of the artwork, so the
+                card is the content here rather than an illustration beside it.
+              */}
+              <div className="overflow-hidden rounded-sm">
                 <Image
                   src={member.photo}
-                  alt={`${member.name} — ${member.role}`}
-                  fill
+                  alt={`${member.name}, ${member.role}. ${member.bio}`}
+                  width={1400}
+                  height={1750}
                   sizes="(min-width: 640px) 50vw, 100vw"
-                  /* The source headshots are already black and white, so the
-                     hover lift here is scale plus a lifting scrim, not colour. */
-                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                  className="h-auto w-full"
                 />
-                <div className="absolute inset-0 bg-ink/25 transition-opacity duration-500 group-hover:opacity-0" />
               </div>
-              <p className="mt-6 font-script text-xl text-sage">Introducing</p>
-              <h3 className="mt-1 font-display text-3xl text-ink">{member.name}</h3>
-              <p className="mt-2 text-xs uppercase tracking-[0.22em] text-sage">
-                {member.role}
-              </p>
-              <p className="mt-5 max-w-md text-sm leading-relaxed text-ink-soft">
-                {member.bio}
-              </p>
+
+              {/* Repeated for assistive tech and search engines: the copy above
+                  exists only as pixels inside the card, which they can't read. */}
+              <div className="sr-only">
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+                <p>{member.bio}</p>
+              </div>
             </motion.article>
           ))}
         </RevealGroup>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { navLinks, site } from "@/data/content";
+import SocialIcon from "@/components/ui/SocialIcon";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -211,9 +212,11 @@ export default function Navbar() {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors hover:text-ink"
+                  aria-label={label}
+                  title={label}
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-line text-ink-soft transition-all duration-300 hover:border-ink hover:text-ink"
                 >
-                  {label}
+                  <SocialIcon name={label} />
                 </a>
               ))}
             </motion.div>

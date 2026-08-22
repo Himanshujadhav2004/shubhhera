@@ -22,16 +22,17 @@ export const site = {
    *
    * Set to "" to show heroPoster alone, which is a fine hero on its own.
    */
-  heroVideo: "https://youtu.be/_2LesVoGjwM",
+  heroVideo: "/media/hero-reel.mp4",
   heroPoster: "/media/wedding/wedding-09.jpg",
   intro:
     "Over 3+ years of dedicated experience in wedding cinematography and post-production — because every story deserves to be told beautifully.",
-  email: "hello@shubhhera.com",
-  phone: "+91 00000 00000",
+  email: "jangidshubh08@gmail.com",
+  phone: "+91 79729 35868",
   location: "Available worldwide · Based in India",
   socials: [
-    { label: "Instagram", href: "https://instagram.com/shubhh.era" },
-    { label: "YouTube", href: "https://youtube.com/@shubhh.era" },
+    // Link kept clean: the ?igsh= on a copied Instagram link is share-tracking
+    // for the copying device and isn't needed for the profile to resolve.
+    { label: "Instagram", href: "https://www.instagram.com/storiesbyshubhh.era" },
   ],
 } as const;
 
@@ -319,19 +320,27 @@ export const films: Film[] = [
 
 /* ----------------------------------------------------------------- Team -- */
 
-/* Names, roles, and bios come from the studio's own "Introducing" cards; the
-   headshots are cropped out of those same cards (see scripts/crop-team.mjs). */
+/**
+ * The studio's own "Introducing" cards, shown whole (see
+ * scripts/build-team-cards.mjs).
+ *
+ * The card artwork already contains the name, role and bio, so the section
+ * renders no visible text of its own — it would duplicate what's in the
+ * picture. The fields below still carry that copy because text baked into an
+ * image is invisible to screen readers and search engines; the section exposes
+ * them to assistive tech instead.
+ */
 export const team = [
   {
     name: "Shubham Jangid",
     role: "Founder & Lead Editor",
-    photo: "/media/team/shubham.jpg",
+    photo: "/media/team/card-shubham.jpg",
     bio: "A professional video editor and the founder of his own wedding creative company, he built his journey from the timeline up. What started as a passion for storytelling evolved into a team of creative minds working together to capture, craft, and deliver meaningful wedding films.",
   },
   {
     name: "Shivam Chavan",
     role: "Candid Photographer",
-    photo: "/media/team/shivam.jpg",
+    photo: "/media/team/card-shivam.jpg",
     bio: "A candid photographer with an eye for the moments most people miss. He believes the best wedding photographs aren't posed — they're found in spontaneous laughter, quiet glances, and everything in between. Stay present, observe closely, let the story unfold.",
   },
 ] as const;

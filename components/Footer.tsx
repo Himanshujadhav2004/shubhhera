@@ -4,6 +4,7 @@ import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { navLinks, site } from "@/data/content";
+import SocialIcon from "@/components/ui/SocialIcon";
 
 export default function Footer() {
   const [showTop, setShowTop] = useState(false);
@@ -45,16 +46,18 @@ export default function Footer() {
 
             <div>
               <p className="text-xs uppercase tracking-[0.25em] text-sage">Follow</p>
-              <div className="mt-4 flex flex-col gap-2.5">
+              <div className="mt-4 flex gap-3">
                 {site.socials.map(({ label, href }) => (
                   <a
                     key={label}
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-sm text-ink-soft transition-colors hover:text-ink"
+                    aria-label={label}
+                    title={label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-soft transition-all duration-300 hover:border-ink hover:text-ink"
                   >
-                    {label}
+                    <SocialIcon name={label} className="h-4 w-4" />
                   </a>
                 ))}
               </div>

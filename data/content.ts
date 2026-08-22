@@ -273,7 +273,10 @@ export const films: Film[] = [
     description:
       "A full-day celebration cut into a feature-length love story — golden-hour portraits, a first look that stopped the room, and a reception that ran until sunrise.",
     poster: "/media/wedding/wedding-16.jpg",
-    embedUrl: "",
+    // Drive works here (click-to-play in the lightbox) even though it failed as
+    // the hero background, which needed silent autoplay. Requires the file to
+    // stay shared as "Anyone with the link".
+    embedUrl: "https://drive.google.com/file/d/1cn8s4OhJR7rjU47nBFGzyowczuPqLh8-/preview",
     meta: "Wedding Film · 2024",
   },
   {

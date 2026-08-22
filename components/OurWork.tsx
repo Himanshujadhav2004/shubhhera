@@ -149,7 +149,7 @@ export default function OurWork() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setPlaying(null)}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-forest-900/95 p-4 backdrop-blur-sm sm:p-8"
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-forest-900/95 backdrop-blur-sm sm:p-8"
             role="dialog"
             aria-modal="true"
             aria-label={`${playing.title} — ${playing.couple}`}
@@ -160,19 +160,45 @@ export default function OurWork() {
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="aspect-video w-full max-w-5xl overflow-hidden rounded-sm bg-black"
+              className="w-full sm:max-w-5xl"
             >
-              <iframe
-                src={toEmbedUrl(playing.embedUrl)}
-                title={`${playing.title} — ${playing.couple}`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="h-full w-full"
-              />
+              {/*
+                A 16:9 film in a portrait viewport can only ever be about a
+                fifth of the screen tall, so the player goes edge-to-edge on
+                phones to claim every pixel of width, and the caption below
+                gives the leftover space something to do instead of leaving the
+                film marooned in a void.
+              */}
+              <div className="aspect-video w-full overflow-hidden bg-black sm:rounded-sm">
+                <iframe
+                  src={toEmbedUrl(playing.embedUrl)}
+                  title={`${playing.title} — ${playing.couple}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="h-full w-full"
+                />
+              </div>
+
+              <div className="px-6 pt-6 sm:px-0 sm:pt-5">
+                <p className="text-[0.65rem] uppercase tracking-[0.25em] text-sage-light">
+                  {playing.meta}
+                </p>
+                <h3 className="mt-2 font-display text-2xl text-cream sm:text-3xl">
+                  {playing.couple}
+                </h3>
+                <p className="mt-1 font-script text-xl text-sage-light">
+                  {playing.title}
+                </p>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-cream-dim sm:hidden">
+                  {playing.description}
+                </p>
+              </div>
             </motion.div>
+
             <button
               onClick={() => setPlaying(null)}
-              className="absolute right-5 top-5 text-3xl leading-none text-cream transition-opacity hover:opacity-60"
+              /* Sized to a comfortable thumb target rather than a bare glyph. */
+              className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-forest-900/70 text-3xl leading-none text-cream backdrop-blur-sm transition-opacity hover:opacity-60 sm:right-5 sm:top-5 sm:bg-transparent"
               aria-label="Close video"
             >
               &times;

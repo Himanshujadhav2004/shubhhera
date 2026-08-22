@@ -59,12 +59,26 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
+        /*
+          Frosted-glass bar. The iOS look isn't blur on its own — it's blur plus
+          a saturation boost (colour behind the panel stays vivid instead of
+          going grey), a light translucent tint, and a one-pixel specular
+          highlight along the top edge. Blur is always on so the bar reads as
+          glass over the hero film too, only the tint swaps with the theme.
+        */
+        className={`fixed inset-x-0 top-0 z-50 backdrop-blur-xl backdrop-saturate-150 transition-colors duration-500 ${
           scrolled
-            ? "border-b border-line bg-paper/90 backdrop-blur-md"
-            : "bg-transparent"
+            ? "border-b border-line/60 bg-paper/55 shadow-[0_8px_32px_-12px_rgba(27,36,24,0.18)]"
+            : "border-b border-white/10 bg-black/10"
         }`}
       >
+        {/* Specular edge: catches light along the top like a glass bevel. */}
+        <span
+          aria-hidden
+          className={`pointer-events-none absolute inset-x-0 top-0 h-px transition-opacity duration-500 ${
+            scrolled ? "bg-white/70 opacity-100" : "bg-white/30 opacity-100"
+          }`}
+        />
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
           {/*
             Two renderings of the same wordmark stacked and cross-faded: the

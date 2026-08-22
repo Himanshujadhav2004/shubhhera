@@ -29,7 +29,7 @@ function FilmRow({
   return (
     <div
       ref={ref}
-      className="grid items-center gap-10 border-t border-cream/10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24"
+      className="grid items-center gap-10 border-t border-line py-16 lg:grid-cols-2 lg:gap-16 lg:py-24"
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -54,12 +54,12 @@ function FilmRow({
                 className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
               />
             </motion.div>
-            <div className="absolute inset-0 bg-forest-900/25 transition-colors duration-500 group-hover:bg-forest-900/45" />
+            <div className="absolute inset-0 bg-ink/15 transition-colors duration-500 group-hover:bg-ink/30" />
 
             {playable && (
               <span className="absolute inset-0 flex items-center justify-center">
-                <span className="flex h-20 w-20 items-center justify-center rounded-full border border-cream/60 backdrop-blur-sm transition-all duration-500 group-hover:scale-110 group-hover:bg-cream/15">
-                  <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-cream" aria-hidden>
+                <span className="flex h-20 w-20 items-center justify-center rounded-full border border-ink/60 backdrop-blur-sm transition-all duration-500 group-hover:scale-110 group-hover:bg-ink/15">
+                  <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-paper" aria-hidden>
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </span>
@@ -76,25 +76,25 @@ function FilmRow({
         transition={{ duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
         className={flipped ? "lg:order-1" : ""}
       >
-        <p className="text-xs uppercase tracking-[0.3em] text-sage-light">{film.meta}</p>
-        <h3 className="mt-5 font-display text-[clamp(1.75rem,4vw,3rem)] leading-tight text-cream">
+        <p className="text-xs uppercase tracking-[0.3em] text-sage">{film.meta}</p>
+        <h3 className="mt-5 font-display text-[clamp(1.75rem,4vw,3rem)] leading-tight text-ink">
           {film.couple}
         </h3>
-        <p className="mt-2 font-script text-2xl text-sage-light">{film.title}</p>
-        <p className="mt-6 max-w-md leading-relaxed text-cream-dim">{film.description}</p>
+        <p className="mt-2 font-script text-2xl text-sage">{film.title}</p>
+        <p className="mt-6 max-w-md leading-relaxed text-ink-soft">{film.description}</p>
 
         {playable ? (
           <button
             onClick={() => onPlay(film)}
-            className="group mt-8 inline-flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-cream"
+            className="group mt-8 inline-flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-ink"
           >
             Watch Film
-            <span className="relative block h-px w-12 bg-cream/40">
-              <span className="absolute inset-y-0 left-0 w-0 bg-cream transition-all duration-500 group-hover:w-full" />
+            <span className="relative block h-px w-12 bg-ink/40">
+              <span className="absolute inset-y-0 left-0 w-0 bg-ink transition-all duration-500 group-hover:w-full" />
             </span>
           </button>
         ) : (
-          <p className="mt-8 text-xs uppercase tracking-[0.25em] text-cream-dim/50">
+          <p className="mt-8 text-xs uppercase tracking-[0.25em] text-ink-faint">
             Film coming soon
           </p>
         )}
@@ -118,17 +118,17 @@ export default function OurWork() {
   }, [playing]);
 
   return (
-    <section id="work" className="relative bg-forest-800 py-28 sm:py-36">
+    <section id="work" className="relative bg-paper-alt py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <RevealGroup className="max-w-3xl">
           <Eyebrow>Our Work</Eyebrow>
           <motion.h2
             variants={fadeUp}
-            className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-cream"
+            className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-ink"
           >
             Selected films
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-6 max-w-xl text-lg text-cream-dim">
+          <motion.p variants={fadeUp} className="mt-6 max-w-xl text-lg text-ink-soft">
             A few of the stories we&rsquo;ve been trusted with — shot, cut, graded, and
             scored in house.
           </motion.p>
@@ -149,7 +149,7 @@ export default function OurWork() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setPlaying(null)}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-forest-900/95 backdrop-blur-sm sm:p-8"
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/92 backdrop-blur-sm sm:p-8"
             role="dialog"
             aria-modal="true"
             aria-label={`${playing.title} — ${playing.couple}`}
@@ -180,16 +180,16 @@ export default function OurWork() {
               </div>
 
               <div className="px-6 pt-6 sm:px-0 sm:pt-5">
-                <p className="text-[0.65rem] uppercase tracking-[0.25em] text-sage-light">
+                <p className="text-[0.65rem] uppercase tracking-[0.25em] text-sage">
                   {playing.meta}
                 </p>
-                <h3 className="mt-2 font-display text-2xl text-cream sm:text-3xl">
+                <h3 className="mt-2 font-display text-2xl text-paper sm:text-3xl">
                   {playing.couple}
                 </h3>
-                <p className="mt-1 font-script text-xl text-sage-light">
+                <p className="mt-1 font-script text-xl text-sage">
                   {playing.title}
                 </p>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-cream-dim sm:hidden">
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-paper/70 sm:hidden">
                   {playing.description}
                 </p>
               </div>
@@ -198,7 +198,7 @@ export default function OurWork() {
             <button
               onClick={() => setPlaying(null)}
               /* Sized to a comfortable thumb target rather than a bare glyph. */
-              className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-forest-900/70 text-3xl leading-none text-cream backdrop-blur-sm transition-opacity hover:opacity-60 sm:right-5 sm:top-5 sm:bg-transparent"
+              className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-ink/70 text-3xl leading-none text-paper backdrop-blur-sm transition-opacity hover:opacity-60 sm:right-5 sm:top-5 sm:bg-transparent"
               aria-label="Close video"
             >
               &times;

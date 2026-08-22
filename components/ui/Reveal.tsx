@@ -100,7 +100,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
   return (
     <motion.p
       variants={fadeUp}
-      className="mb-5 text-xs uppercase tracking-[0.35em] text-sage-light"
+      className="mb-5 text-xs uppercase tracking-[0.35em] text-sage"
     >
       {children}
     </motion.p>

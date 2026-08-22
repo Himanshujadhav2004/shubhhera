@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import Image from "next/image";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { navLinks, site } from "@/data/content";
 
@@ -10,6 +10,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
   const { scrollY } = useScroll();
+
+  /* Unscrolled, the bar floats over the hero film and needs light type; once
+     it lands on the paper background it has to invert to dark. */
+  const onDark = !scrolled;
 
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 40));
 
@@ -56,22 +60,41 @@ export default function Navbar() {
         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
           scrolled
-            ? "bg-forest-900/85 backdrop-blur-md border-b border-cream/10"
+            ? "border-b border-line bg-paper/90 backdrop-blur-md"
             : "bg-transparent"
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+          {/*
+            Two renderings of the same wordmark stacked and cross-faded: the
+            ink one is the base (and carries the alt text), the cream one fades
+            in while the bar floats over the hero film. Swapping `src` instead
+            would pop, since the incoming file decodes mid-transition.
+          */}
           <a
             href="#top"
-            className="group flex flex-col leading-none"
+            className="relative block shrink-0"
             aria-label={`${site.name} — back to top`}
           >
-            <span className="font-display text-xl tracking-[0.2em] text-cream sm:text-2xl">
-              {site.wordmark.primary}
-            </span>
-            <span className="mt-1 text-[0.55rem] tracking-[0.4em] text-sage-light transition-colors group-hover:text-cream sm:text-[0.6rem]">
-              {site.wordmark.secondary}
-            </span>
+            <Image
+              src="/media/brand/wordmark-ink.png"
+              alt={site.name}
+              width={720}
+              height={162}
+              priority
+              className="h-8 w-auto sm:h-10"
+            />
+            <Image
+              src="/media/brand/wordmark-cream.png"
+              alt=""
+              aria-hidden
+              width={720}
+              height={162}
+              priority
+              className={`absolute inset-0 h-8 w-auto transition-opacity duration-500 sm:h-10 ${
+                !open && onDark ? "opacity-100" : "opacity-0"
+              }`}
+            />
           </a>
 
           <ul className="hidden items-center gap-9 lg:flex">
@@ -79,13 +102,17 @@ export default function Navbar() {
               <li key={href}>
                 <a
                   href={href}
-                  className="relative py-1 text-sm text-cream-dim transition-colors hover:text-cream"
+                  className={`relative py-1 text-sm transition-colors duration-500 ${
+                    onDark
+                      ? "text-cream-dim hover:text-cream"
+                      : "text-ink-soft hover:text-ink"
+                  }`}
                 >
                   {label}
                   {active === href && (
                     <motion.span
                       layoutId="nav-underline"
-                      className="absolute -bottom-0.5 left-0 right-0 h-px bg-sage-light"
+                      className="absolute -bottom-0.5 left-0 right-0 h-px bg-sage"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -96,7 +123,11 @@ export default function Navbar() {
 
           <a
             href="#contact"
-            className="hidden rounded-full border border-sage-light/60 px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-cream transition-all duration-300 hover:border-sage-light hover:bg-sage/25 lg:block"
+            className={`hidden rounded-full border px-6 py-2.5 text-xs uppercase tracking-[0.2em] transition-all duration-300 lg:block ${
+              onDark
+                ? "border-cream/50 text-cream hover:border-cream hover:bg-cream/10"
+                : "border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-paper"
+            }`}
           >
             Book Now
           </a>
@@ -110,17 +141,17 @@ export default function Navbar() {
             <motion.span
               animate={open ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="block h-px w-7 bg-cream"
+              className={`block h-px w-7 transition-colors duration-500 ${!open && onDark ? "bg-cream" : "bg-ink"}`}
             />
             <motion.span
               animate={open ? { opacity: 0 } : { opacity: 1 }}
               transition={{ duration: 0.2 }}
-              className="block h-px w-7 bg-cream"
+              className={`block h-px w-7 transition-colors duration-500 ${!open && onDark ? "bg-cream" : "bg-ink"}`}
             />
             <motion.span
               animate={open ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="block h-px w-7 bg-cream"
+              className={`block h-px w-7 transition-colors duration-500 ${!open && onDark ? "bg-cream" : "bg-ink"}`}
             />
           </button>
         </nav>
@@ -133,7 +164,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="grain fixed inset-0 z-40 flex flex-col justify-center bg-forest-900 px-8 lg:hidden"
+            className="fixed inset-0 z-40 flex flex-col justify-center bg-paper px-8 lg:hidden"
           >
             <motion.ul
               initial="hidden"
@@ -160,7 +191,7 @@ export default function Navbar() {
                   <a
                     href={href}
                     onClick={() => setOpen(false)}
-                    className="font-display text-4xl text-cream transition-colors hover:text-sage-light sm:text-5xl"
+                    className="font-display text-4xl text-ink transition-colors hover:text-sage sm:text-5xl"
                   >
                     {label}
                   </a>
@@ -172,7 +203,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { delay: 0.6 } }}
               exit={{ opacity: 0 }}
-              className="relative z-10 mt-14 flex gap-6 text-sm text-cream-dim"
+              className="relative z-10 mt-14 flex gap-6 text-sm text-ink-soft"
             >
               {site.socials.map(({ label, href }) => (
                 <a
@@ -180,7 +211,7 @@ export default function Navbar() {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors hover:text-cream"
+                  className="transition-colors hover:text-ink"
                 >
                   {label}
                 </a>

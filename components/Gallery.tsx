@@ -44,13 +44,13 @@ export default function Gallery() {
     lightboxIndex === null ? null : items[lightboxIndex];
 
   return (
-    <section id="gallery" className="relative bg-forest-900 py-28 sm:py-36">
+    <section id="gallery" className="relative bg-paper py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <RevealGroup className="max-w-3xl">
           <Eyebrow>Gallery</Eyebrow>
           <motion.h2
             variants={fadeUp}
-            className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-cream"
+            className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-ink"
           >
             Stills from the stories we&rsquo;ve told
           </motion.h2>
@@ -68,14 +68,14 @@ export default function Gallery() {
                 aria-pressed={filter === f}
                 className={`relative rounded-full border px-5 py-2.5 text-xs uppercase tracking-[0.18em] transition-colors duration-300 ${
                   filter === f
-                    ? "border-cream text-forest-900"
-                    : "border-cream/20 text-cream-dim hover:border-cream/50 hover:text-cream"
+                    ? "border-ink text-paper"
+                    : "border-line text-ink-soft hover:border-sage hover:text-ink"
                 }`}
               >
                 {filter === f && (
                   <motion.span
                     layoutId="gallery-pill"
-                    className="absolute inset-0 rounded-full bg-cream"
+                    className="absolute inset-0 rounded-full bg-ink"
                     transition={{ type: "spring", stiffness: 340, damping: 30 }}
                   />
                 )}
@@ -112,8 +112,8 @@ export default function Gallery() {
                   sizes="(min-width: 1024px) 33vw, 50vw"
                   className="w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-forest-900/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <span className="absolute bottom-4 left-4 translate-y-3 text-[0.6rem] uppercase tracking-[0.25em] text-cream opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="absolute inset-0 bg-ink/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <span className="absolute bottom-4 left-4 translate-y-3 text-[0.6rem] uppercase tracking-[0.25em] text-paper opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                   {item.category}
                 </span>
               </motion.button>
@@ -130,7 +130,7 @@ export default function Gallery() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={close}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-forest-900/95 p-4 backdrop-blur-sm sm:p-8"
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/92 p-4 backdrop-blur-sm sm:p-8"
             role="dialog"
             aria-modal="true"
             aria-label={openItem.alt}
@@ -151,14 +151,14 @@ export default function Gallery() {
                 sizes="90vw"
                 className="max-h-[82vh] w-full rounded-sm object-contain"
               />
-              <p className="mt-4 text-center text-xs uppercase tracking-[0.25em] text-cream-dim">
+              <p className="mt-4 text-center text-xs uppercase tracking-[0.25em] text-paper/70">
                 {openItem.category} · {(lightboxIndex ?? 0) + 1} / {items.length}
               </p>
             </motion.div>
 
             <button
               onClick={close}
-              className="absolute right-5 top-5 text-3xl leading-none text-cream transition-opacity hover:opacity-60"
+              className="absolute right-5 top-5 text-3xl leading-none text-paper transition-opacity hover:opacity-60"
               aria-label="Close"
             >
               &times;
@@ -168,7 +168,7 @@ export default function Gallery() {
                 e.stopPropagation();
                 step(-1);
               }}
-              className="absolute left-3 top-1/2 -translate-y-1/2 p-4 text-3xl text-cream transition-opacity hover:opacity-60 sm:left-6"
+              className="absolute left-3 top-1/2 -translate-y-1/2 p-4 text-3xl text-paper transition-opacity hover:opacity-60 sm:left-6"
               aria-label="Previous image"
             >
               &#8249;
@@ -178,7 +178,7 @@ export default function Gallery() {
                 e.stopPropagation();
                 step(1);
               }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 p-4 text-3xl text-cream transition-opacity hover:opacity-60 sm:right-6"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-4 text-3xl text-paper transition-opacity hover:opacity-60 sm:right-6"
               aria-label="Next image"
             >
               &#8250;

@@ -7,19 +7,19 @@ import { RevealGroup, fadeUp } from "@/components/ui/Reveal";
 
 export default function Team() {
   return (
-    <section id="team" className="relative bg-forest-900 py-28 sm:py-36">
+    <section id="team" className="relative bg-paper py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <RevealGroup className="max-w-3xl">
-          <motion.p variants={fadeUp} className="font-script text-3xl text-sage-light">
+          <motion.p variants={fadeUp} className="font-script text-3xl text-sage">
             Meet
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="mt-2 font-display text-[clamp(2.25rem,7vw,5rem)] font-semibold uppercase leading-[0.95] tracking-tight text-cream"
+            className="mt-2 font-display text-[clamp(2.25rem,7vw,5rem)] font-semibold uppercase leading-[0.95] tracking-tight text-ink"
           >
             The Team
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-3 font-script text-2xl text-sage-light">
+          <motion.p variants={fadeUp} className="mt-3 font-script text-2xl text-sage">
             that started it all
           </motion.p>
         </RevealGroup>
@@ -40,14 +40,14 @@ export default function Team() {
                      hover lift here is scale plus a lifting scrim, not colour. */
                   className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-forest-900/40 transition-opacity duration-500 group-hover:opacity-0" />
+                <div className="absolute inset-0 bg-ink/25 transition-opacity duration-500 group-hover:opacity-0" />
               </div>
-              <p className="mt-6 font-script text-xl text-sage-light">Introducing</p>
-              <h3 className="mt-1 font-display text-3xl text-cream">{member.name}</h3>
-              <p className="mt-2 text-xs uppercase tracking-[0.22em] text-sage-light">
+              <p className="mt-6 font-script text-xl text-sage">Introducing</p>
+              <h3 className="mt-1 font-display text-3xl text-ink">{member.name}</h3>
+              <p className="mt-2 text-xs uppercase tracking-[0.22em] text-sage">
                 {member.role}
               </p>
-              <p className="mt-5 max-w-md text-sm leading-relaxed text-cream-dim">
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-ink-soft">
                 {member.bio}
               </p>
             </motion.article>

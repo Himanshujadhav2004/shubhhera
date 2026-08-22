@@ -13,17 +13,17 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="grain relative border-t border-cream/10 bg-forest-900 py-16">
+      <footer className="grain relative border-t border-line bg-paper py-16">
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <p className="font-display text-2xl tracking-[0.2em] text-cream">
+              <p className="font-display text-2xl tracking-[0.2em] text-ink">
                 {site.wordmark.primary}
               </p>
-              <p className="mt-1.5 text-[0.6rem] tracking-[0.4em] text-sage-light">
+              <p className="mt-1.5 text-[0.6rem] tracking-[0.4em] text-sage">
                 {site.wordmark.secondary}
               </p>
-              <p className="mt-6 max-w-xs text-sm leading-relaxed text-cream-dim">
+              <p className="mt-6 max-w-xs text-sm leading-relaxed text-ink-soft">
                 {site.tagline}
               </p>
             </div>
@@ -34,7 +34,7 @@ export default function Footer() {
                   <li key={href}>
                     <a
                       href={href}
-                      className="text-sm text-cream-dim transition-colors hover:text-cream"
+                      className="text-sm text-ink-soft transition-colors hover:text-ink"
                     >
                       {label}
                     </a>
@@ -44,7 +44,7 @@ export default function Footer() {
             </nav>
 
             <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-sage-light">Follow</p>
+              <p className="text-xs uppercase tracking-[0.25em] text-sage">Follow</p>
               <div className="mt-4 flex flex-col gap-2.5">
                 {site.socials.map(({ label, href }) => (
                   <a
@@ -52,7 +52,7 @@ export default function Footer() {
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-sm text-cream-dim transition-colors hover:text-cream"
+                    className="text-sm text-ink-soft transition-colors hover:text-ink"
                   >
                     {label}
                   </a>
@@ -60,14 +60,14 @@ export default function Footer() {
               </div>
               <a
                 href={`mailto:${site.email}`}
-                className="mt-6 block text-sm text-cream-dim transition-colors hover:text-cream"
+                className="mt-6 block text-sm text-ink-soft transition-colors hover:text-ink"
               >
                 {site.email}
               </a>
             </div>
           </div>
 
-          <div className="mt-14 flex flex-col gap-3 border-t border-cream/10 pt-8 text-xs text-cream-dim/60 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-14 flex flex-col gap-3 border-t border-line pt-8 text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between">
             <p>
               &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
             </p>
@@ -86,7 +86,7 @@ export default function Footer() {
             whileHover={{ y: -3 }}
             transition={{ duration: 0.3 }}
             aria-label="Back to top"
-            className="fixed bottom-7 right-7 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-cream/25 bg-forest-900/85 text-cream backdrop-blur-sm transition-colors hover:border-sage-light hover:bg-sage/25"
+            className="fixed bottom-7 right-7 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-paper/90 text-ink backdrop-blur-sm transition-colors hover:border-sage-light hover:bg-sage/15"
           >
             <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden>
               <path

@@ -30,7 +30,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative bg-forest-900 py-28 sm:py-36">
+    <section id="contact" className="relative bg-paper py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24">
           <div>
@@ -38,11 +38,11 @@ export default function Contact() {
               <Eyebrow>Contact Us</Eyebrow>
               <motion.h2
                 variants={fadeUp}
-                className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-cream"
+                className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-ink"
               >
                 Let&rsquo;s tell your story
               </motion.h2>
-              <motion.p variants={fadeUp} className="mt-6 max-w-md leading-relaxed text-cream-dim">
+              <motion.p variants={fadeUp} className="mt-6 max-w-md leading-relaxed text-ink-soft">
                 Tell us about your day — the date, the place, and what matters most to
                 you. We reply to every enquiry personally.
               </motion.p>
@@ -50,29 +50,29 @@ export default function Contact() {
 
             <Reveal delay={0.15} className="mt-12 space-y-8">
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-sage-light">Email</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-sage">Email</p>
                 <a
                   href={`mailto:${site.email}`}
-                  className="mt-2 block font-display text-xl text-cream transition-colors hover:text-sage-light"
+                  className="mt-2 block font-display text-xl text-ink transition-colors hover:text-sage"
                 >
                   {site.email}
                 </a>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-sage-light">Phone</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-sage">Phone</p>
                 <a
                   href={`tel:${site.phone.replace(/\s/g, "")}`}
-                  className="mt-2 block font-display text-xl text-cream transition-colors hover:text-sage-light"
+                  className="mt-2 block font-display text-xl text-ink transition-colors hover:text-sage"
                 >
                   {site.phone}
                 </a>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-sage-light">Based in</p>
-                <p className="mt-2 text-cream-dim">{site.location}</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-sage">Based in</p>
+                <p className="mt-2 text-ink-soft">{site.location}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-sage-light">Follow</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-sage">Follow</p>
                 <div className="mt-3 flex gap-4">
                   {site.socials.map(({ label, href }) => (
                     <a
@@ -80,7 +80,7 @@ export default function Contact() {
                       href={href}
                       target="_blank"
                       rel="noreferrer"
-                      className="group inline-flex items-center gap-2 text-cream transition-colors hover:text-sage-light"
+                      className="group inline-flex items-center gap-2 text-ink transition-colors hover:text-sage"
                     >
                       {label}
                       <span className="block h-px w-6 bg-current opacity-40 transition-all duration-400 group-hover:w-9 group-hover:opacity-100" />
@@ -94,7 +94,7 @@ export default function Contact() {
           <Reveal delay={0.1}>
             <form
               onSubmit={handleSubmit}
-              className="rounded-sm border border-cream/10 bg-forest-800/60 p-8 sm:p-10"
+              className="rounded-sm border border-line bg-paper-alt p-8 sm:p-10"
             >
               <div className="grid gap-6 sm:grid-cols-2">
                 {fields.map((f) => (
@@ -102,22 +102,22 @@ export default function Contact() {
                     key={f.name}
                     className={`block ${f.name === "name" || f.name === "email" ? "sm:col-span-2" : ""}`}
                   >
-                    <span className="text-xs uppercase tracking-[0.2em] text-cream-dim">
+                    <span className="text-xs uppercase tracking-[0.2em] text-ink-soft">
                       {f.label}
-                      {f.required && <span className="text-sage-light"> *</span>}
+                      {f.required && <span className="text-sage"> *</span>}
                     </span>
                     <input
                       name={f.name}
                       type={f.type}
                       required={f.required}
                       disabled={status !== "idle"}
-                      className="mt-2.5 w-full border-b border-cream/20 bg-transparent pb-2.5 text-cream outline-none transition-colors duration-300 placeholder:text-cream/25 focus:border-sage-light disabled:opacity-50 [color-scheme:dark]"
+                      className="mt-2.5 w-full border-b border-line bg-transparent pb-2.5 text-ink outline-none transition-colors duration-300 placeholder:text-ink/25 focus:border-sage disabled:opacity-50"
                     />
                   </label>
                 ))}
 
                 <label className="block sm:col-span-2">
-                  <span className="text-xs uppercase tracking-[0.2em] text-cream-dim">
+                  <span className="text-xs uppercase tracking-[0.2em] text-ink-soft">
                     Message
                   </span>
                   <textarea
@@ -125,7 +125,7 @@ export default function Contact() {
                     rows={4}
                     disabled={status !== "idle"}
                     placeholder="Tell us about your day…"
-                    className="mt-2.5 w-full resize-none border-b border-cream/20 bg-transparent pb-2.5 text-cream outline-none transition-colors duration-300 placeholder:text-cream/25 focus:border-sage-light disabled:opacity-50"
+                    className="mt-2.5 w-full resize-none border-b border-line bg-transparent pb-2.5 text-ink outline-none transition-colors duration-300 placeholder:text-ink/25 focus:border-sage disabled:opacity-50"
                   />
                 </label>
               </div>
@@ -136,7 +136,7 @@ export default function Contact() {
                 whileHover={status === "idle" ? { scale: 1.02 } : undefined}
                 whileTap={status === "idle" ? { scale: 0.98 } : undefined}
                 transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                className="mt-10 flex w-full items-center justify-center gap-3 rounded-full bg-cream px-8 py-4 text-xs uppercase tracking-[0.25em] text-forest-900 disabled:opacity-70"
+                className="mt-10 flex w-full items-center justify-center gap-3 rounded-full bg-ink px-8 py-4 text-xs uppercase tracking-[0.25em] text-paper disabled:opacity-70"
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {status === "idle" && (
@@ -160,7 +160,7 @@ export default function Contact() {
                       <motion.span
                         animate={{ rotate: 360 }}
                         transition={{ duration: 0.9, repeat: Infinity, ease: "linear" }}
-                        className="block h-3.5 w-3.5 rounded-full border-[1.5px] border-forest-900/25 border-t-forest-900"
+                        className="block h-3.5 w-3.5 rounded-full border-[1.5px] border-paper/30 border-t-paper"
                       />
                       Sending
                     </motion.span>
@@ -195,7 +195,7 @@ export default function Contact() {
                   <motion.p
                     initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-5 text-center text-sm text-cream-dim"
+                    className="mt-5 text-center text-sm text-ink-soft"
                   >
                     We&rsquo;ve received your enquiry and will be in touch shortly.
                   </motion.p>

@@ -10,13 +10,13 @@ export default function Services() {
   const active = services.find((s) => s.id === activeId) ?? services[0];
 
   return (
-    <section id="services" className="relative bg-forest-800 py-28 sm:py-36">
+    <section id="services" className="relative bg-paper-alt py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <RevealGroup className="max-w-3xl">
           <Eyebrow>Services</Eyebrow>
           <motion.h2
             variants={fadeUp}
-            className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-cream"
+            className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-ink"
           >
             From the first frame to the final grade
           </motion.h2>
@@ -27,7 +27,7 @@ export default function Services() {
           <div
             role="tablist"
             aria-label="Service categories"
-            className="inline-flex rounded-full border border-cream/15 p-1.5"
+            className="inline-flex rounded-full border border-line p-1.5"
           >
             {services.map((cat) => (
               <button
@@ -36,13 +36,13 @@ export default function Services() {
                 aria-selected={activeId === cat.id}
                 onClick={() => setActiveId(cat.id)}
                 className={`relative rounded-full px-7 py-3 text-xs uppercase tracking-[0.2em] transition-colors duration-300 ${
-                  activeId === cat.id ? "text-forest-900" : "text-cream-dim hover:text-cream"
+                  activeId === cat.id ? "text-paper" : "text-ink-soft hover:text-ink"
                 }`}
               >
                 {activeId === cat.id && (
                   <motion.span
                     layoutId="service-tab"
-                    className="absolute inset-0 rounded-full bg-cream"
+                    className="absolute inset-0 rounded-full bg-ink"
                     transition={{ type: "spring", stiffness: 340, damping: 30 }}
                   />
                 )}
@@ -60,7 +60,7 @@ export default function Services() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="mt-10 max-w-xl text-lg text-cream-dim">{active.blurb}</p>
+            <p className="mt-10 max-w-xl text-lg text-ink-soft">{active.blurb}</p>
 
             <motion.div
               initial="hidden"
@@ -69,7 +69,7 @@ export default function Services() {
                 hidden: {},
                 visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
               }}
-              className="mt-10 grid gap-px overflow-hidden rounded-sm bg-cream/10 sm:grid-cols-2 lg:grid-cols-3"
+              className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/5 sm:grid-cols-2 lg:grid-cols-3"
             >
               {active.items.map((item, i) => (
                 <motion.article
@@ -77,20 +77,20 @@ export default function Services() {
                   variants={fadeUp}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.35 }}
-                  className="group relative flex min-h-56 flex-col justify-between bg-forest-800 p-8 transition-colors duration-500 hover:bg-forest-700"
+                  className="group relative flex min-h-56 flex-col justify-between bg-paper-alt p-8 transition-colors duration-500 hover:bg-paper-deep"
                 >
-                  <span className="font-display text-sm text-sage-light/60">
+                  <span className="font-display text-sm text-sage/60">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="mt-6">
-                    <h3 className="font-display text-2xl leading-snug text-cream">
+                    <h3 className="font-display text-2xl leading-snug text-ink">
                       {item.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-cream-dim">
+                    <p className="mt-3 text-sm leading-relaxed text-ink-soft">
                       {item.body}
                     </p>
                   </div>
-                  <span className="absolute inset-x-8 bottom-0 h-px origin-left scale-x-0 bg-sage-light transition-transform duration-500 group-hover:scale-x-100" />
+                  <span className="absolute inset-x-8 bottom-0 h-px origin-left scale-x-0 bg-sage transition-transform duration-500 group-hover:scale-x-100" />
                 </motion.article>
               ))}
             </motion.div>
@@ -101,18 +101,18 @@ export default function Services() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.25 }}
-                className="mt-12 rounded-sm border border-cream/10 p-8 sm:p-10"
+                className="mt-12 rounded-sm border border-line p-8 sm:p-10"
               >
-                <p className="font-script text-2xl text-sage-light">
+                <p className="font-script text-2xl text-sage">
                   Our approach to editing
                 </p>
                 <ul className="mt-6 grid gap-x-10 gap-y-3 sm:grid-cols-2">
                   {editingApproach.map((line) => (
                     <li
                       key={line}
-                      className="flex items-start gap-3 text-sm text-cream-dim"
+                      className="flex items-start gap-3 text-sm text-ink-soft"
                     >
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-sage-light" />
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-sage" />
                       {line}
                     </li>
                   ))}
@@ -124,16 +124,16 @@ export default function Services() {
 
         {/* Compact strengths strip — deliberately styled unlike the About list. */}
         <RevealGroup
-          className="mt-20 flex flex-wrap items-center justify-center gap-x-3 gap-y-4 border-t border-cream/10 pt-12"
+          className="mt-20 flex flex-wrap items-center justify-center gap-x-3 gap-y-4 border-t border-line pt-12"
           staggerChildren={0.08}
         >
           {serviceStrengths.map((label, i) => (
             <motion.span key={label} variants={fadeUp} className="flex items-center gap-3">
-              <span className="text-sm uppercase tracking-[0.18em] text-cream-dim">
+              <span className="text-sm uppercase tracking-[0.18em] text-ink-soft">
                 {label}
               </span>
               {i < serviceStrengths.length - 1 && (
-                <span className="text-sage-light/40" aria-hidden>
+                <span className="text-sage/40" aria-hidden>
                   ·
                 </span>
               )}

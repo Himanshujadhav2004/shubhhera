@@ -25,7 +25,7 @@ export default function Testimonials() {
 
   return (
     <section
-      className="relative bg-forest-700 py-28 sm:py-36"
+      className="relative bg-paper-alt py-28 sm:py-36"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
@@ -36,7 +36,7 @@ export default function Testimonials() {
           <Eyebrow>Kind Words</Eyebrow>
           <motion.h2
             variants={fadeUp}
-            className="font-display text-[clamp(1.75rem,4vw,3rem)] leading-tight text-cream"
+            className="font-display text-[clamp(1.75rem,4vw,3rem)] leading-tight text-ink"
           >
             What our couples say
           </motion.h2>
@@ -62,7 +62,7 @@ export default function Testimonials() {
               className="cursor-grab active:cursor-grabbing"
             >
               <div
-                className="flex justify-center gap-1.5 text-sage-light"
+                className="flex justify-center gap-1.5 text-sage"
                 aria-label={`${active.rating} out of 5 stars`}
               >
                 {Array.from({ length: active.rating }).map((_, i) => (
@@ -72,15 +72,15 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <p className="mt-8 font-display text-[clamp(1.25rem,2.6vw,1.9rem)] leading-relaxed text-balance text-cream">
+              <p className="mt-8 font-display text-[clamp(1.25rem,2.6vw,1.9rem)] leading-relaxed text-balance text-ink">
                 &ldquo;{active.quote}&rdquo;
               </p>
 
               <footer className="mt-8">
-                <p className="text-sm uppercase tracking-[0.22em] text-cream">
+                <p className="text-sm uppercase tracking-[0.22em] text-ink">
                   {active.name}
                 </p>
-                <p className="mt-1.5 text-xs uppercase tracking-[0.2em] text-sage-light">
+                <p className="mt-1.5 text-xs uppercase tracking-[0.2em] text-sage">
                   {active.detail}
                 </p>
               </footer>
@@ -96,7 +96,7 @@ export default function Testimonials() {
               aria-label={`Show testimonial from ${t.name}`}
               aria-current={i === index}
               className={`h-1.5 rounded-full transition-all duration-400 ${
-                i === index ? "w-8 bg-cream" : "w-1.5 bg-cream/30 hover:bg-cream/60"
+                i === index ? "w-8 bg-ink" : "w-1.5 bg-line hover:bg-sage"
               }`}
             />
           ))}

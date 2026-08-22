@@ -7,19 +7,19 @@ import { Eyebrow, Reveal, RevealGroup, fadeUp } from "@/components/ui/Reveal";
 
 export default function About() {
   return (
-    <section id="about" className="relative bg-forest-900 py-28 sm:py-36">
+    <section id="about" className="relative bg-paper py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <RevealGroup className="max-w-3xl">
           <Eyebrow>{about.eyebrow}</Eyebrow>
           <motion.h2
             variants={fadeUp}
-            className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-cream"
+            className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] text-balance text-ink"
           >
             {about.heading}
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="mt-8 text-lg leading-relaxed text-cream-dim"
+            className="mt-8 text-lg leading-relaxed text-ink-soft"
           >
             {about.intro}
           </motion.p>
@@ -28,10 +28,10 @@ export default function About() {
         {/* Who we are — copy paired with a still so the section is not a wall of text. */}
         <div className="mt-24 grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
           <Reveal className="order-2 lg:order-1">
-            <p className="font-script text-3xl text-sage-light">Who we are</p>
+            <p className="font-script text-3xl text-sage">Who we are</p>
             <div className="mt-6 space-y-6">
               {about.whoWeAre.map((para) => (
-                <p key={para} className="leading-relaxed text-cream-dim">
+                <p key={para} className="leading-relaxed text-ink-soft">
                   {para}
                 </p>
               ))}
@@ -51,7 +51,7 @@ export default function About() {
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-forest-900/20" />
+              <div className="absolute inset-0 bg-ink/10" />
             </motion.div>
           </Reveal>
         </div>
@@ -59,24 +59,24 @@ export default function About() {
         {/* Our approach */}
         <div className="mt-28">
           <Reveal>
-            <p className="font-script text-3xl text-sage-light">Our approach</p>
+            <p className="font-script text-3xl text-sage">Our approach</p>
           </Reveal>
 
           <RevealGroup
-            className="mt-10 grid gap-px overflow-hidden rounded-sm bg-cream/10 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/5 sm:grid-cols-2 lg:grid-cols-3"
             staggerChildren={0.07}
           >
             {about.approach.map(({ title, body }, i) => (
               <motion.div
                 key={title}
                 variants={fadeUp}
-                className="group relative bg-forest-900 p-8 transition-colors duration-500 hover:bg-forest-800"
+                className="group relative bg-paper p-8 transition-colors duration-500 hover:bg-paper-deep"
               >
-                <span className="font-display text-sm text-sage-light/60">
+                <span className="font-display text-sm text-sage/60">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-4 font-display text-2xl text-cream">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-cream-dim">{body}</p>
+                <h3 className="mt-4 font-display text-2xl text-ink">{title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{body}</p>
                 <span className="absolute inset-x-8 bottom-0 h-px origin-left scale-x-0 bg-sage-light transition-transform duration-500 group-hover:scale-x-100" />
               </motion.div>
             ))}
@@ -86,8 +86,8 @@ export default function About() {
         {/* Why choose us — checkmarks draw themselves in as the list staggers. */}
         <div className="mt-28 grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <Reveal>
-            <p className="font-script text-3xl text-sage-light">Why choose us</p>
-            <h3 className="mt-5 font-display text-3xl leading-tight text-cream sm:text-4xl">
+            <p className="font-script text-3xl text-sage">Why choose us</p>
+            <h3 className="mt-5 font-display text-3xl leading-tight text-ink sm:text-4xl">
               The reasons couples keep sending us their friends.
             </h3>
           </Reveal>
@@ -98,13 +98,13 @@ export default function About() {
                 <motion.li
                   key={item}
                   variants={fadeUp}
-                  className="flex items-start gap-4 border-b border-cream/10 pb-5"
+                  className="flex items-start gap-4 border-b border-line pb-5"
                 >
                   <motion.svg
                     viewBox="0 0 24 24"
                     fill="none"
                     aria-hidden
-                    className="mt-0.5 h-5 w-5 shrink-0 text-sage-light"
+                    className="mt-0.5 h-5 w-5 shrink-0 text-sage"
                   >
                     <motion.path
                       d="M4 12.5l5 5L20 6.5"
@@ -122,7 +122,7 @@ export default function About() {
                       }}
                     />
                   </motion.svg>
-                  <span className="leading-relaxed text-cream-dim">{item}</span>
+                  <span className="leading-relaxed text-ink-soft">{item}</span>
                 </motion.li>
               ))}
             </ul>

@@ -1,110 +1,74 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
-import { films, type Film } from "@/data/content";
+import { AnimatePresence, motion } from "motion/react";
+import { films, filmFilters, type Film } from "@/data/content";
 import { toEmbedUrl } from "@/lib/video";
-import { Eyebrow, RevealGroup, fadeUp } from "@/components/ui/Reveal";
+import { Eyebrow, Reveal, RevealGroup, fadeUp } from "@/components/ui/Reveal";
 
-function FilmRow({
-  film,
-  index,
-  onPlay,
-}: {
-  film: Film;
-  index: number;
-  onPlay: (f: Film) => void;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+/**
+ * YouTube's own thumbnail CDN, so a film needs no poster image of its own.
+ * `maxresdefault` is the 1280x720 version and is what pro uploads have, but it
+ * genuinely 404s on some videos — the card falls back to `hqdefault`, which
+ * always exists.
+ */
+const poster = (id: string, max = true) =>
+  `https://i.ytimg.com/vi/${id}/${max ? "maxresdefault" : "hqdefault"}.jpg`;
 
-  const flipped = index % 2 === 1;
-  const playable = film.embedUrl.length > 0;
+function FilmCard({ film, onPlay }: { film: Film; onPlay: (f: Film) => void }) {
+  const [maxRes, setMaxRes] = useState(true);
 
   return (
-    <div
-      ref={ref}
-      className="grid items-center gap-10 border-t border-line py-16 lg:grid-cols-2 lg:gap-16 lg:py-24"
+    <motion.button
+      layout
+      variants={fadeUp}
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.96 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      onClick={() => onPlay(film)}
+      className="group block w-full text-left"
+      aria-label={`Watch ${film.title}`}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={flipped ? "lg:order-2" : ""}
-      >
-        <button
-          onClick={() => playable && onPlay(film)}
-          disabled={!playable}
-          className="group relative block w-full overflow-hidden rounded-sm disabled:cursor-default"
-          aria-label={playable ? `Watch ${film.title} — ${film.couple}` : film.title}
-        >
-          <div className="relative aspect-16/10 overflow-hidden">
-            <motion.div style={{ y }} className="absolute inset-[-8%]">
-              <Image
-                src={film.poster}
-                alt={`${film.title} — ${film.couple}`}
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-              />
-            </motion.div>
-            <div className="absolute inset-0 bg-ink/15 transition-colors duration-500 group-hover:bg-ink/30" />
+      <div className="relative aspect-video overflow-hidden rounded-sm bg-paper-deep">
+        <Image
+          src={poster(film.youtubeId, maxRes)}
+          alt={film.title}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          onError={() => setMaxRes(false)}
+          className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-ink/10 transition-colors duration-500 group-hover:bg-ink/30" />
 
-            {playable && (
-              <span className="absolute inset-0 flex items-center justify-center">
-                <span className="flex h-20 w-20 items-center justify-center rounded-full border border-ink/60 backdrop-blur-sm transition-all duration-500 group-hover:scale-110 group-hover:bg-ink/15">
-                  <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-paper" aria-hidden>
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </span>
-              </span>
-            )}
-          </div>
-        </button>
-      </motion.div>
+        <span className="absolute inset-0 flex items-center justify-center">
+          <span className="flex h-14 w-14 items-center justify-center rounded-full border border-paper/70 bg-ink/25 backdrop-blur-sm transition-all duration-500 group-hover:scale-110 group-hover:bg-ink/50">
+            <svg viewBox="0 0 24 24" className="ml-0.5 h-5 w-5 fill-paper" aria-hidden>
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+        </span>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-        className={flipped ? "lg:order-1" : ""}
-      >
-        <p className="text-xs uppercase tracking-[0.3em] text-sage">{film.meta}</p>
-        <h3 className="mt-5 font-display text-[clamp(1.75rem,4vw,3rem)] leading-tight text-ink">
-          {film.couple}
-        </h3>
-        <p className="mt-2 font-script text-2xl text-sage">{film.title}</p>
-        <p className="mt-6 max-w-md leading-relaxed text-ink-soft">{film.description}</p>
-
-        {playable ? (
-          <button
-            onClick={() => onPlay(film)}
-            className="group mt-8 inline-flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-ink"
-          >
-            Watch Film
-            <span className="relative block h-px w-12 bg-ink/40">
-              <span className="absolute inset-y-0 left-0 w-0 bg-ink transition-all duration-500 group-hover:w-full" />
-            </span>
-          </button>
-        ) : (
-          <p className="mt-8 text-xs uppercase tracking-[0.25em] text-ink-faint">
-            Film coming soon
-          </p>
-        )}
-      </motion.div>
-    </div>
+      <p className="mt-4 text-[0.6rem] uppercase tracking-[0.25em] text-sage">
+        {film.category}
+      </p>
+      <h3 className="mt-1.5 font-display text-xl leading-snug text-ink">
+        {film.title}
+      </h3>
+    </motion.button>
   );
 }
 
 export default function OurWork() {
+  const [filter, setFilter] = useState<(typeof filmFilters)[number]>("All");
   const [playing, setPlaying] = useState<Film | null>(null);
+
+  const shown = useMemo(
+    () => (filter === "All" ? films : films.filter((f) => f.category === filter)),
+    [filter],
+  );
 
   useEffect(() => {
     if (!playing) return;
@@ -129,16 +93,47 @@ export default function OurWork() {
             Selected films
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-6 max-w-xl text-lg text-ink-soft">
-            A few of the stories we&rsquo;ve been trusted with — shot, cut, graded, and
-            scored in house.
+            Teasers, wedding highlights, and reels — shot, cut, graded, and scored
+            in house.
           </motion.p>
         </RevealGroup>
 
-        <div className="mt-16">
-          {films.map((film, i) => (
-            <FilmRow key={film.title} film={film} index={i} onPlay={setPlaying} />
-          ))}
-        </div>
+        <Reveal className="mt-10">
+          <div className="flex flex-wrap gap-2.5">
+            {filmFilters.map((f) => (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                aria-pressed={filter === f}
+                className={`relative rounded-full border px-5 py-2.5 text-xs uppercase tracking-[0.18em] transition-colors duration-300 ${
+                  filter === f
+                    ? "border-ink text-paper"
+                    : "border-line text-ink-soft hover:border-sage hover:text-ink"
+                }`}
+              >
+                {filter === f && (
+                  <motion.span
+                    layoutId="work-pill"
+                    className="absolute inset-0 rounded-full bg-ink"
+                    transition={{ type: "spring", stiffness: 340, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{f}</span>
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        <motion.div
+          layout
+          className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          <AnimatePresence mode="popLayout">
+            {shown.map((film) => (
+              <FilmCard key={film.youtubeId} film={film} onPlay={setPlaying} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       <AnimatePresence>
@@ -149,19 +144,12 @@ export default function OurWork() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setPlaying(null)}
-            /*
-              forest-900, not ink: `ink` is the theme's green-black and at 92%
-              the paper page bleeds through it into a murky olive. A film needs
-              a near-solid dark ground to read against.
-
-              On phones the block is pinned near the top rather than centred —
-              a 16:9 film is only ~220px tall in portrait, and centring it left
-              it stranded between two fields of empty backdrop.
-            */
+            /* Near-solid dark ground so the film reads; pinned high on phones
+               because a 16:9 player is only ~a fifth of a portrait screen. */
             className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-forest-900/97 pt-20 backdrop-blur-sm sm:items-center sm:p-8 sm:pt-8"
             role="dialog"
             aria-modal="true"
-            aria-label={`${playing.title} — ${playing.couple}`}
+            aria-label={playing.title}
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
@@ -171,59 +159,29 @@ export default function OurWork() {
               onClick={(e) => e.stopPropagation()}
               className="w-full sm:max-w-5xl"
             >
-              {/*
-                A 16:9 film in a portrait viewport can only ever be about a
-                fifth of the screen tall, so the player goes edge-to-edge on
-                phones to claim every pixel of width, and the caption below
-                gives the leftover space something to do instead of leaving the
-                film marooned in a void.
-              */}
               <div className="aspect-video w-full overflow-hidden bg-black sm:rounded-sm">
                 <iframe
-                  src={toEmbedUrl(playing.embedUrl)}
-                  title={`${playing.title} — ${playing.couple}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  src={`${toEmbedUrl(playing.youtubeId)}&autoplay=1`}
+                  title={playing.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                   className="h-full w-full"
                 />
               </div>
 
               <div className="px-6 pt-6 sm:px-0 sm:pt-5">
-                <p className="text-[0.65rem] uppercase tracking-[0.25em] text-sage">
-                  {playing.meta}
+                <p className="text-[0.65rem] uppercase tracking-[0.25em] text-sage-light">
+                  {playing.category}
                 </p>
                 <h3 className="mt-2 font-display text-2xl text-paper sm:text-3xl">
-                  {playing.couple}
-                </h3>
-                <p className="mt-1 font-script text-xl text-sage">
                   {playing.title}
-                </p>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-paper/70 sm:hidden">
-                  {playing.description}
-                </p>
-
-                {/* Portrait phones cap a 16:9 film at roughly a fifth of the
-                    screen; the player's own fullscreen control is the only way
-                    to make it bigger, so point at it rather than leave the
-                    viewer assuming this small is all there is. */}
-                <p className="mt-6 flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-paper/45 sm:hidden">
-                  <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5" aria-hidden>
-                    <path
-                      d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  Tap fullscreen in the player for a larger view
-                </p>
+                </h3>
               </div>
             </motion.div>
 
             <button
               onClick={() => setPlaying(null)}
-              /* Sized to a comfortable thumb target rather than a bare glyph. */
               className="fixed right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-forest-900/70 text-3xl leading-none text-paper backdrop-blur-sm transition-opacity hover:opacity-60 sm:absolute sm:right-5 sm:top-5 sm:bg-transparent"
               aria-label="Close video"
             >

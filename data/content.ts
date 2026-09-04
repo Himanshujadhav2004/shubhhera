@@ -243,79 +243,62 @@ export const galleryFilters: readonly ("All" | GalleryCategory)[] = [
 /* ------------------------------------------------------------- Our Work -- */
 
 /**
- * `embedUrl` accepts the link you actually have in hand — no need to build an
- * embed URL by hand. All of these work:
+ * The film portfolio, grouped the way the studio groups it.
  *
- *   https://www.youtube.com/watch?v=VIDEO_ID     (address bar)
- *   https://youtu.be/VIDEO_ID                    (share button)
- *   VIDEO_ID                                     (just the 11-char id)
- *   https://vimeo.com/123456789
- *   https://player.mediadelivery.net/embed/...   (Bunny, or any embed URL)
- *
- * lib/video.ts normalizes it. Upload films to YouTube as **Unlisted** — they
- * stay off your channel and out of search, but still embed here.
- *
- * Leave it empty and the card still renders: it shows the still without a play
- * affordance, so the site stays correct until the films are up.
+ * `youtubeId` is just the 11-character id from the share link — lib/video.ts
+ * builds the embed URL, and the card poster comes from YouTube's own thumbnail
+ * CDN, so adding a film needs nothing but its id, a title and a category.
  */
+export type FilmCategory =
+  | "Teasers"
+  | "Client Work"
+  | "Our Weddings"
+  | "Portrait Reels";
+
 export type Film = {
   title: string;
-  couple: string;
-  description: string;
-  poster: string;
-  embedUrl: string;
-  meta: string;
+  youtubeId: string;
+  category: FilmCategory;
 };
 
+/** Titles are the studio's own, minus the "| CINEMATIC" that ends every one. */
 export const films: Film[] = [
-  {
-    title: "The Wedding Film",
-    couple: "Jay & Yashika",
-    description:
-      "A full-day celebration cut into a feature-length love story — golden-hour portraits, a first look that stopped the room, and a reception that ran until sunrise.",
-    poster: "/media/wedding/wedding-16.jpg",
-    // Drive works here (click-to-play in the lightbox) even though it failed as
-    // the hero background, which needed silent autoplay. Requires the file to
-    // stay shared as "Anyone with the link".
-    embedUrl: "https://drive.google.com/file/d/1cn8s4OhJR7rjU47nBFGzyowczuPqLh8-/preview",
-    meta: "Wedding Film · 2024",
-  },
-  {
-    title: "Pre-Wedding Story",
-    couple: "Dhiraj & Vaishnavi",
-    description:
-      "Shot across open country at first light. Quiet, unhurried, and built entirely around the two of them rather than the location.",
-    poster: "/media/pre-wedding/pre-wedding-06.jpg",
-    embedUrl: "",
-    meta: "Pre-Wedding · 2024",
-  },
-  {
-    title: "Same-Day Edit",
-    couple: "Ansh & Riya",
-    description:
-      "Filmed, cut, graded, and delivered inside eighteen hours — playing on the reception screen while the night was still going.",
-    poster: "/media/wedding/wedding-08.jpg",
-    embedUrl: "",
-    meta: "Same-Day Edit · 2024",
-  },
-  {
-    title: "The Teaser",
-    couple: "Ranaji",
-    description:
-      "Ninety seconds built to make people ask when the full film lands. Every frame earns its place.",
-    poster: "/media/pre-wedding/pre-wedding-16.jpg",
-    embedUrl: "",
-    meta: "Wedding Teaser · 2023",
-  },
-  {
-    title: "Brand Commercial",
-    couple: "Carnival",
-    description:
-      "Commercial storytelling with the same cinematic language we bring to weddings — subject as character, not as prop.",
-    poster: "/media/model/model-04.jpg",
-    embedUrl: "",
-    meta: "Commercial · 2024",
-  },
+  // Teasers portfolio
+  { title: "Pre-Wedding Teaser", youtubeId: "-eDKGEjjP9A", category: "Teasers" },
+  { title: "Pre-Wedding Teaser", youtubeId: "2bMAn1asHJY", category: "Teasers" },
+  { title: "Pre-Wedding Teaser", youtubeId: "O3Ir3wc0mnM", category: "Teasers" },
+  { title: "Pre-Wedding Teaser", youtubeId: "jlRvbqcbPnQ", category: "Teasers" },
+  { title: "Pre-Wedding Teaser", youtubeId: "n8HCWswHymA", category: "Teasers" },
+
+  // Edited work for clients
+  { title: "Mehandi Highlight", youtubeId: "-7pfPpwWMZc", category: "Client Work" },
+  { title: "Jay & Yashika — Wedding Highlight", youtubeId: "4ktl_xN7xWA", category: "Client Work" },
+  { title: "Akanksh & Dipshikha — Wedding Highlight", youtubeId: "RYQ31dYIG9c", category: "Client Work" },
+  { title: "Wedding Highlight", youtubeId: "RbPgIN1mcLM", category: "Client Work" },
+  { title: "Jayesh Bhavsar — Wedding Highlight", youtubeId: "XJtgotz40TQ", category: "Client Work" },
+  { title: "Carnival Reel", youtubeId: "b-WMu-9IN-Y", category: "Client Work" },
+
+  // Our weddings
+  { title: "Bidai Reel", youtubeId: "5muNzSyEMFU", category: "Our Weddings" },
+  { title: "Dhiraj & Vaishnavi — Wedding Reel", youtubeId: "Fu_WNY3kN9g", category: "Our Weddings" },
+  { title: "Dhiraj & Vaishnavi — Wedding Reel", youtubeId: "GMtd31QElLg", category: "Our Weddings" },
+  { title: "Pranjal & Roshan — Wedding Reel", youtubeId: "NThl-DItBpY", category: "Our Weddings" },
+  { title: "Vadik", youtubeId: "n540XwsE8pU", category: "Our Weddings" },
+
+  // Portrait reels
+  { title: "Model Shoot Reel", youtubeId: "-WBqYjv5XBM", category: "Portrait Reels" },
+  { title: "Pre-Wedding Reel", youtubeId: "F7jkdrTpugo", category: "Portrait Reels" },
+  { title: "Pre-Wedding Reel", youtubeId: "Wm_mg0WKxwc", category: "Portrait Reels" },
+  { title: "Model Shoot Reel — Makeup", youtubeId: "X5P4lZRJKlE", category: "Portrait Reels" },
+  { title: "Model Shoot Reel — Makeup", youtubeId: "kmOnJzWLJb8", category: "Portrait Reels" },
+];
+
+export const filmFilters: readonly ("All" | FilmCategory)[] = [
+  "All",
+  "Teasers",
+  "Client Work",
+  "Our Weddings",
+  "Portrait Reels",
 ];
 
 /* ----------------------------------------------------------------- Team -- */

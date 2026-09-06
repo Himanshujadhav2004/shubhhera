@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { editingApproach, serviceStrengths, services } from "@/data/content";
+import { serviceStrengths, services } from "@/data/content";
 import { Eyebrow, Reveal, RevealGroup, fadeUp } from "@/components/ui/Reveal";
 
 export default function Services() {
@@ -60,8 +60,6 @@ export default function Services() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="mt-10 max-w-xl text-lg text-ink-soft">{active.blurb}</p>
-
             <motion.div
               initial="hidden"
               animate="visible"
@@ -73,52 +71,23 @@ export default function Services() {
             >
               {active.items.map((item, i) => (
                 <motion.article
-                  key={item.title}
+                  key={item}
                   variants={fadeUp}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.35 }}
-                  className="group relative flex min-h-56 flex-col justify-between bg-paper-alt p-8 transition-colors duration-500 hover:bg-paper-deep"
+                  className="group relative flex min-h-36 flex-col justify-between bg-paper-alt p-8 transition-colors duration-500 hover:bg-paper-deep"
                 >
                   <span className="font-display text-sm text-sage/60">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div className="mt-6">
-                    <h3 className="font-display text-2xl leading-snug text-ink">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-                      {item.body}
-                    </p>
-                  </div>
+                  <h3 className="mt-8 font-display text-2xl leading-snug text-ink">
+                    {item}
+                  </h3>
                   <span className="absolute inset-x-8 bottom-0 h-px origin-left scale-x-0 bg-sage transition-transform duration-500 group-hover:scale-x-100" />
                 </motion.article>
               ))}
             </motion.div>
 
-            {/* Sub-list that only belongs to the photo/editing category. */}
-            {active.id === "editing" && (
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.25 }}
-                className="mt-12 rounded-sm border border-line p-8 sm:p-10"
-              >
-                <p className="font-script text-2xl text-sage">
-                  Our approach to editing
-                </p>
-                <ul className="mt-6 grid gap-x-10 gap-y-3 sm:grid-cols-2">
-                  {editingApproach.map((line) => (
-                    <li
-                      key={line}
-                      className="flex items-start gap-3 text-sm text-ink-soft"
-                    >
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-sage" />
-                      {line}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            )}
           </motion.div>
         </AnimatePresence>
 

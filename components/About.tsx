@@ -66,7 +66,7 @@ export default function About() {
             className="mt-10 grid gap-px overflow-hidden rounded-sm bg-ink/5 sm:grid-cols-2 lg:grid-cols-3"
             staggerChildren={0.07}
           >
-            {about.approach.map(({ title, body }, i) => (
+            {about.approach.map((title, i) => (
               <motion.div
                 key={title}
                 variants={fadeUp}
@@ -75,9 +75,8 @@ export default function About() {
                 <span className="font-display text-sm text-sage/60">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-4 font-display text-2xl text-ink">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{body}</p>
-                <span className="absolute inset-x-8 bottom-0 h-px origin-left scale-x-0 bg-sage-light transition-transform duration-500 group-hover:scale-x-100" />
+                <h3 className="mt-6 font-display text-2xl text-ink">{title}</h3>
+                <span className="absolute inset-x-8 bottom-0 h-px origin-left scale-x-0 bg-sage transition-transform duration-500 group-hover:scale-x-100" />
               </motion.div>
             ))}
           </RevealGroup>

@@ -51,124 +51,61 @@ export const about = {
   eyebrow: "About Us",
   heading: "Every story deserves to be told beautifully",
   intro:
-    "Welcome to Stories by Shubhh.era, where we transform your most precious moments into cinematic masterpieces. Over 3+ years of dedicated experience in wedding cinematography and post-production have taught us one thing above all: every story deserves to be told beautifully.",
+    "Over 3+ years of wedding cinematography and post-production, turning the moments that matter into films worth rewatching.",
   whoWeAre: [
-    "We are a creative team specializing in capturing and crafting wedding films, commercial content, and creative visual projects. What began as a passion for storytelling has grown into a full-fledged production and editing studio.",
-    "A wedding day isn't just an event — it's a collection of emotions, connections, and unforgettable moments. Our mission is to preserve them in a way that is cinematic and deeply personal.",
+    "A production and editing studio for wedding films, commercial content, and creative work — built out of a passion for storytelling.",
   ],
+  /* Titles only. The explanations that used to sit under each one said little
+     the title didn't already say, and this section is meant to be scanned. */
   approach: [
-    {
-      title: "Cinematic Excellence",
-      body: "Blending technical expertise with artistic vision on every frame.",
-    },
-    {
-      title: "Client-Centric",
-      body: "Your story, your vision, your voice — we build the film around it.",
-    },
-    {
-      title: "Attention to Detail",
-      body: "From color grading to sound design, the small things carry the feeling.",
-    },
-    {
-      title: "Timely Delivery",
-      body: "Respecting your timeline without ever compromising on quality.",
-    },
-    {
-      title: "Full Service",
-      body: "From first concept conversation through to final delivery.",
-    },
+    "Cinematic Excellence",
+    "Client-Centric",
+    "Attention to Detail",
+    "Timely Delivery",
+    "Full Service",
   ],
   whyChooseUs: [
-    "3+ years of professional wedding cinematography experience",
-    "Expertise across weddings, commercials, and creative content",
-    "Professional-grade equipment and industry-standard editing software",
-    "A portfolio of satisfied clients and stunning films",
-    "Same-day editing capabilities for events",
-    "Dedicated to storytelling with authenticity and artistry",
+    "3+ years of professional wedding cinematography",
+    "Weddings, commercials, and creative content",
+    "Professional-grade equipment and industry-standard tools",
+    "Same-day editing for events",
   ],
 } as const;
 
 /* ------------------------------------------------------------- Services -- */
 
-export type Service = { title: string; body: string };
-
+/* Service names carry the meaning on their own; the sentence under each one
+   was restating the title in longer form. */
 export const services: {
   id: string;
   label: string;
-  blurb: string;
-  items: readonly Service[];
+  items: readonly string[];
 }[] = [
   {
     id: "video",
     label: "Video",
-    blurb: "Films built to be felt — shot, cut, graded, and scored with intent.",
     items: [
-      {
-        title: "Video Editing",
-        body: "Transforming raw footage into stunning visual stories with precision, creativity, and technical excellence.",
-      },
-      {
-        title: "Influencer Content Editing",
-        body: "Trend-aware edits optimized for YouTube, TikTok, and Instagram — built to hold attention and drive engagement.",
-      },
-      {
-        title: "Instagram Reels & Short-Form",
-        body: "Fast-paced edits with dynamic transitions, music sync, text overlays, and color grading made to stop the scroll.",
-      },
-      {
-        title: "Wedding Films",
-        body: "Cinematic, emotionally-told love stories using advanced color grading, sound design, and cinematic technique.",
-      },
-      {
-        title: "Wedding Teasers",
-        body: "Compact, highlight-driven films that build anticipation ahead of the full feature.",
-      },
-      {
-        title: "Pre-Wedding Videos",
-        body: "Cinematic visuals paired with authentic moments and music of your choosing — made for sharing.",
-      },
-      {
-        title: "Same-Day Edits (SDE)",
-        body: "A beautifully edited highlight film, ready to play at your reception the very same day.",
-      },
+      "Wedding Films",
+      "Wedding Teasers",
+      "Pre-Wedding Videos",
+      "Same-Day Edits",
+      "Instagram Reels & Short-Form",
+      "Influencer Content Editing",
+      "Video Editing",
     ],
   },
   {
     id: "editing",
     label: "Editing & Photo",
-    blurb: "Post-production craft — for your story, your brand, or your studio.",
     items: [
-      {
-        title: "Photo Editing",
-        body: "Color grading, skin retouching, creative compositing, and album design.",
-      },
-      {
-        title: "Model Shots & Creative Content",
-        body: "Fashion and creative visual content for brands, influencers, and individuals.",
-      },
-      {
-        title: "Commercial & Brand Content",
-        body: "Commercials and promotional storytelling designed to engage and convert.",
-      },
-      {
-        title: "Makeup Content & Coverage",
-        body: "Precise documentation of beauty transformations, start to finish.",
-      },
-      {
-        title: "Professional Editing Services",
-        body: "Post-production support for other photographers, studios, and creators using tools like DaVinci Resolve.",
-      },
+      "Photo Editing",
+      "Model Shoots & Creative Content",
+      "Commercial & Brand Content",
+      "Makeup Content & Coverage",
+      "Post-Production for Studios",
     ],
   },
 ];
-
-export const editingApproach = [
-  "Professional color grading and tone matching",
-  "Detailed retouching while maintaining authenticity",
-  "Creative enhancements that elevate without overwhelming",
-  "Batch processing for consistent, cohesive results",
-  "Custom styling to match your aesthetic",
-] as const;
 
 export const serviceStrengths = [
   "Expert Storytelling",
@@ -332,29 +269,25 @@ export const team = [
 
 export const testimonials = [
   {
-    quote:
-      "We have watched our film more times than we can count, and it still makes us cry. They did not just record the day — they understood it.",
+    quote: "We have watched our film more times than we can count, and it still makes us cry.",
     name: "Jay & Yashika",
     detail: "Wedding Film",
     rating: 5,
   },
   {
-    quote:
-      "The same-day edit played at our reception and the entire room went silent. Nobody could believe it was shot that morning.",
+    quote: "The same-day edit played at our reception and the whole room went silent.",
     name: "Ansh & Riya",
     detail: "Same-Day Edit",
     rating: 5,
   },
   {
-    quote:
-      "Every frame felt considered. The color, the sound, the pacing — it looks like something made for a cinema, not a wedding.",
+    quote: "Every frame felt considered. It looks like something made for a cinema.",
     name: "Dhiraj & Vaishnavi",
     detail: "Pre-Wedding Story",
     rating: 5,
   },
   {
-    quote:
-      "Professional from the first call to final delivery. They took our rough brief and returned something better than we pictured.",
+    quote: "Professional from the first call to final delivery.",
     name: "Carnival",
     detail: "Brand Commercial",
     rating: 5,

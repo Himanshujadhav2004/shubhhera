@@ -31,7 +31,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative bg-paper py-28 sm:py-36">
+    <section id="contact" className="relative bg-paper-alt py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24">
           <div>
@@ -97,7 +97,7 @@ export default function Contact() {
           <Reveal delay={0.1}>
             <form
               onSubmit={handleSubmit}
-              className="rounded-sm border border-line bg-paper-alt p-8 sm:p-10"
+              className="rounded-sm border border-line bg-paper p-8 sm:p-10"
             >
               <div className="grid gap-6 sm:grid-cols-2">
                 {fields.map((f) => (

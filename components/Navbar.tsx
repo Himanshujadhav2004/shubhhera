@@ -66,17 +66,25 @@ export default function Navbar() {
           highlight along the top edge. Blur is always on so the bar reads as
           glass over the hero film too, only the tint swaps with the theme.
         */
-        className={`fixed inset-x-0 top-0 z-50 backdrop-blur-xl backdrop-saturate-150 transition-colors duration-500 ${
+        /*
+          Fully transparent over the hero — no blur, no tint, no border — so the
+          film reads uninterrupted. The frosted glass materialises only once the
+          page scrolls: blur plus a saturation boost (which keeps colour behind
+          the panel vivid instead of grey), a light tint, and a specular top
+          edge. backdrop-filter is named in the transition explicitly so the
+          blur fades in rather than snapping on.
+        */
+        className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${
           scrolled
-            ? "border-b border-line/60 bg-paper/55 shadow-[0_8px_32px_-12px_rgba(27,36,24,0.18)]"
-            : "border-b border-white/10 bg-black/10"
+            ? "border-line/60 bg-paper/55 shadow-[0_8px_32px_-12px_rgba(27,36,24,0.18)] backdrop-blur-xl backdrop-saturate-150"
+            : "border-transparent bg-transparent"
         }`}
       >
         {/* Specular edge: catches light along the top like a glass bevel. */}
         <span
           aria-hidden
-          className={`pointer-events-none absolute inset-x-0 top-0 h-px transition-opacity duration-500 ${
-            scrolled ? "bg-white/70 opacity-100" : "bg-white/30 opacity-100"
+          className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-white/70 transition-opacity duration-500 ${
+            scrolled ? "opacity-100" : "opacity-0"
           }`}
         />
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">

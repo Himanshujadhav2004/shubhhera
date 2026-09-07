@@ -7,7 +7,7 @@ import { Eyebrow, Reveal, RevealGroup, fadeUp } from "@/components/ui/Reveal";
 
 export default function About() {
   return (
-    <section id="about" className="relative bg-paper py-28 sm:py-36">
+    <section id="about" className="relative bg-paper-alt py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <RevealGroup className="max-w-3xl">
           <Eyebrow>{about.eyebrow}</Eyebrow>
@@ -70,7 +70,7 @@ export default function About() {
               <motion.div
                 key={title}
                 variants={fadeUp}
-                className="group relative bg-paper p-8 transition-colors duration-500 hover:bg-paper-deep"
+                className="group relative bg-paper-alt p-8 transition-colors duration-500 hover:bg-paper-deep"
               >
                 <span className="font-display text-sm text-sage/60">
                   {String(i + 1).padStart(2, "0")}

@@ -25,7 +25,7 @@ export default function Testimonials() {
 
   return (
     <section
-      className="relative bg-paper-alt py-28 sm:py-36"
+      className="relative bg-paper py-28 sm:py-36"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"

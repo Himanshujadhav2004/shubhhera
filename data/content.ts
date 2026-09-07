@@ -37,11 +37,10 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { label: "About Us", href: "#about" },
-  { label: "Services", href: "#services" },
   { label: "Gallery", href: "#gallery" },
   { label: "Our Work", href: "#work" },
   { label: "Team", href: "#team" },
+  { label: "About Us", href: "#about" },
   { label: "Contact Us", href: "#contact" },
 ] as const;
 
@@ -71,49 +70,6 @@ export const about = {
     "Same-day editing for events",
   ],
 } as const;
-
-/* ------------------------------------------------------------- Services -- */
-
-/* Service names carry the meaning on their own; the sentence under each one
-   was restating the title in longer form. */
-export const services: {
-  id: string;
-  label: string;
-  items: readonly string[];
-}[] = [
-  {
-    id: "video",
-    label: "Video",
-    items: [
-      "Wedding Films",
-      "Wedding Teasers",
-      "Pre-Wedding Videos",
-      "Same-Day Edits",
-      "Instagram Reels & Short-Form",
-      "Influencer Content Editing",
-      "Video Editing",
-    ],
-  },
-  {
-    id: "editing",
-    label: "Editing & Photo",
-    items: [
-      "Photo Editing",
-      "Model Shoots & Creative Content",
-      "Commercial & Brand Content",
-      "Makeup Content & Coverage",
-      "Post-Production for Studios",
-    ],
-  },
-];
-
-export const serviceStrengths = [
-  "Expert Storytelling",
-  "Technical Precision",
-  "Fast Turnaround",
-  "Custom Solutions",
-  "Collaborative Process",
-] as const;
 
 /* -------------------------------------------------------------- Gallery -- */
 

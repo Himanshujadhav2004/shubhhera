@@ -74,7 +74,10 @@ export default function Footer() {
             <p>
               &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
             </p>
-            <p>Wedding cinematography · Photo &amp; video editing</p>
+            <p>
+              Wedding photography &amp; cinematography in Shirpur, Dhule &amp; across
+              Maharashtra
+            </p>
           </div>
         </div>
       </footer>

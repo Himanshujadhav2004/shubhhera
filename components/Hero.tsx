@@ -34,7 +34,7 @@ export default function Hero() {
             video fails to load or autoplay is blocked. */}
         <Image
           src={site.heroPoster}
-          alt="Cinematic wedding still by Stories by Shubhh.era"
+          alt="Baraat procession with dhol players at a wedding in Shirpur, Dhule — wedding photography by Stories by Shubhh.era"
           fill
           priority
           sizes="100vw"
@@ -78,7 +78,7 @@ export default function Hero() {
             */}
             <motion.iframe
               src={toEmbedUrl(site.heroVideo, { background: true })}
-              title="Showreel — Stories by Shubhh.era"
+              title="Showreel â Stories by Shubhh.era"
               allow="autoplay; encrypted-media"
               referrerPolicy="strict-origin-when-cross-origin"
               tabIndex={-1}
@@ -93,7 +93,7 @@ export default function Hero() {
           </div>
         )}
 
-        {/* Neutral black scrim only — no colour cast. It exists purely so the
+        {/* Neutral black scrim only â no colour cast. It exists purely so the
             cream type holds contrast over moving footage; the film keeps its
             own grade rather than being pushed toward the brand green. */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/30 to-black/80" />
@@ -145,7 +145,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 1 }}
           className="mt-4 text-sm text-cream-dim/70"
         >
-          3+ years of wedding cinematography and post-production
+          Wedding photography &amp; cinematic films in Shirpur, Dhule and across
+          Maharashtra — 3+ years behind the camera and the timeline
         </motion.p>
 
         <motion.div

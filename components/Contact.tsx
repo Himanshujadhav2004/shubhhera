@@ -71,6 +71,7 @@ export default function Contact() {
               <div>
                 <p className="text-xs uppercase tracking-[0.25em] text-sage">Based in</p>
                 <p className="mt-2 text-ink-soft">{site.location}</p>
+                <p className="mt-1 text-sm text-ink-faint">{site.serviceAreaLine}</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-[0.25em] text-sage">Follow</p>

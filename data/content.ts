@@ -30,10 +30,12 @@ export const site = {
    */
   heroPoster: "/media/wedding/hero-poster.png",
   intro:
-    "Over 3+ years of dedicated experience in wedding cinematography and post-production — because every story deserves to be told beautifully.",
+    "A wedding photography and film studio based in Shirpur, shooting across Dhule, Nandurbar, Jalgaon and Nashik. Over 3+ years of dedicated experience in wedding cinematography and post-production — because every story deserves to be told beautifully.",
   email: "jangidshubh08@gmail.com",
   phone: "+91 79729 35868",
-  location: "Available worldwide · Based in India",
+  location: "Shirpur, Dhule · Maharashtra, India",
+  /** Shown under the location line; the travel radius, stated plainly. */
+  serviceAreaLine: "Available across Dhule, Nandurbar, Jalgaon, Nashik and all of India",
   socials: [
     // Link kept clean: the ?igsh= on a copied Instagram link is share-tracking
     // for the copying device and isn't needed for the profile to resolve.
@@ -53,11 +55,12 @@ export const navLinks = [
 
 export const about = {
   eyebrow: "About Us",
-  heading: "Every story deserves to be told beautifully",
+  heading: "Wedding photography & films in Shirpur and Dhule",
   intro:
-    "Over 3+ years of wedding cinematography and post-production, turning the moments that matter into films worth rewatching.",
+    "Stories by Shubhh.era is a wedding photography and cinematography studio based in Shirpur, Maharashtra. Over 3+ years of shooting and post-production across Dhule, Nandurbar, Jalgaon and Nashik — turning the moments that matter into films worth rewatching.",
   whyChooseUs: [
-    "3+ years of professional wedding cinematography",
+    "3+ years of professional wedding photography and cinematography",
+    "Local to Shirpur and Dhule — we know the venues, the light and the routes",
     "Weddings, commercials, and creative content",
     "Professional-grade equipment and industry-standard tools",
     "Same-day editing for events",
@@ -90,31 +93,31 @@ const COUPLE_PORTRAITS = [1, 13, 14, 15, 16];
 export const gallery: GalleryItem[] = [
   ...seq(18).map((i) => ({
     src: `/media/wedding/wedding-${pad(i)}.jpg`,
-    alt: `Wedding photography still ${i} by Stories by Shubhh.era`,
+    alt: `Wedding photography in Shirpur, Dhule — candid wedding still ${i} by Stories by Shubhh.era`,
     category: "Weddings" as const,
     orientation: (i % 3 === 0 ? "landscape" : "portrait") as GalleryItem["orientation"],
   })),
   ...BRIDAL_PORTRAITS.map((i, n) => ({
     src: `/media/portrait/portrait-${pad(i)}.jpg`,
-    alt: `Bridal portrait ${n + 1} by Stories by Shubhh.era`,
+    alt: `Bridal portrait photography in Shirpur, Dhule — frame ${n + 1} by Stories by Shubhh.era`,
     category: "Weddings" as const,
     orientation: "portrait" as const,
   })),
   ...seq(18).map((i) => ({
     src: `/media/pre-wedding/pre-wedding-${pad(i)}.jpg`,
-    alt: `Pre-wedding shoot still ${i} by Stories by Shubhh.era`,
+    alt: `Pre-wedding shoot in Shirpur, Dhule — still ${i} by Stories by Shubhh.era`,
     category: "Pre-Wedding" as const,
     orientation: (i % 4 === 0 ? "landscape" : "portrait") as GalleryItem["orientation"],
   })),
   ...COUPLE_PORTRAITS.map((i, n) => ({
     src: `/media/portrait/portrait-${pad(i)}.jpg`,
-    alt: `Pre-wedding couple portrait ${n + 1} by Stories by Shubhh.era`,
+    alt: `Pre-wedding couple portrait ${n + 1} in Shirpur, Dhule by Stories by Shubhh.era`,
     category: "Pre-Wedding" as const,
     orientation: "portrait" as const,
   })),
   ...seq(6).map((i) => ({
     src: `/media/model/model-${pad(i)}.jpg`,
-    alt: `Model and creative shoot still ${i} by Stories by Shubhh.era`,
+    alt: `Model and creative photoshoot in Shirpur, Dhule — still ${i} by Stories by Shubhh.era`,
     category: "Model" as const,
     orientation: "portrait" as const,
   })),

@@ -51,18 +51,6 @@ export const about = {
   heading: "Every story deserves to be told beautifully",
   intro:
     "Over 3+ years of wedding cinematography and post-production, turning the moments that matter into films worth rewatching.",
-  whoWeAre: [
-    "A production and editing studio for wedding films, commercial content, and creative work — built out of a passion for storytelling.",
-  ],
-  /* Titles only. The explanations that used to sit under each one said little
-     the title didn't already say, and this section is meant to be scanned. */
-  approach: [
-    "Cinematic Excellence",
-    "Client-Centric",
-    "Attention to Detail",
-    "Timely Delivery",
-    "Full Service",
-  ],
   whyChooseUs: [
     "3+ years of professional wedding cinematography",
     "Weddings, commercials, and creative content",
@@ -73,23 +61,26 @@ export const about = {
 
 /* -------------------------------------------------------------- Gallery -- */
 
-export type GalleryCategory =
-  | "Weddings"
-  | "Pre-Wedding"
-  | "Commercial"
-  | "Reels"
-  | "Makeup";
+export type GalleryCategory = "Weddings" | "Pre-Wedding" | "Model";
 
 export type GalleryItem = {
   src: string;
   alt: string;
   category: GalleryCategory;
-  /** Drives masonry row-spans so the grid keeps a magazine rhythm. */
+  /** Drives the intrinsic ratio, so a wrong value would crop the picture. */
   orientation: "portrait" | "landscape";
 };
 
 const seq = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
 const pad = (n: number) => String(n).padStart(2, "0");
+
+/*
+  The portrait/ folder holds two different shoots, so it is split by subject
+  rather than by folder: 02-12 are bridal portraits from a wedding, while 01
+  and 13-16 are couple/pre-wedding frames.
+*/
+const BRIDAL_PORTRAITS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const COUPLE_PORTRAITS = [1, 13, 14, 15, 16];
 
 export const gallery: GalleryItem[] = [
   ...seq(18).map((i) => ({
@@ -98,28 +89,28 @@ export const gallery: GalleryItem[] = [
     category: "Weddings" as const,
     orientation: (i % 3 === 0 ? "landscape" : "portrait") as GalleryItem["orientation"],
   })),
+  ...BRIDAL_PORTRAITS.map((i, n) => ({
+    src: `/media/portrait/portrait-${pad(i)}.jpg`,
+    alt: `Bridal portrait ${n + 1} by Stories by Shubhh.era`,
+    category: "Weddings" as const,
+    orientation: "portrait" as const,
+  })),
   ...seq(18).map((i) => ({
     src: `/media/pre-wedding/pre-wedding-${pad(i)}.jpg`,
     alt: `Pre-wedding shoot still ${i} by Stories by Shubhh.era`,
     category: "Pre-Wedding" as const,
     orientation: (i % 4 === 0 ? "landscape" : "portrait") as GalleryItem["orientation"],
   })),
-  ...seq(6).map((i) => ({
-    src: `/media/model/model-${pad(i)}.jpg`,
-    alt: `Model and creative shoot still ${i} by Stories by Shubhh.era`,
-    category: "Commercial" as const,
-    orientation: (i % 2 === 0 ? "landscape" : "portrait") as GalleryItem["orientation"],
-  })),
-  ...seq(10).map((i) => ({
+  ...COUPLE_PORTRAITS.map((i, n) => ({
     src: `/media/portrait/portrait-${pad(i)}.jpg`,
-    alt: `Portrait and reel still ${i} by Stories by Shubhh.era`,
-    category: "Reels" as const,
+    alt: `Pre-wedding couple portrait ${n + 1} by Stories by Shubhh.era`,
+    category: "Pre-Wedding" as const,
     orientation: "portrait" as const,
   })),
   ...seq(6).map((i) => ({
-    src: `/media/portrait/portrait-${pad(i + 10)}.jpg`,
-    alt: `Makeup coverage still ${i} by Stories by Shubhh.era`,
-    category: "Makeup" as const,
+    src: `/media/model/model-${pad(i)}.jpg`,
+    alt: `Model and creative shoot still ${i} by Stories by Shubhh.era`,
+    category: "Model" as const,
     orientation: "portrait" as const,
   })),
 ];
@@ -128,9 +119,7 @@ export const galleryFilters: readonly ("All" | GalleryCategory)[] = [
   "All",
   "Weddings",
   "Pre-Wedding",
-  "Commercial",
-  "Reels",
-  "Makeup",
+  "Model",
 ];
 
 /* ------------------------------------------------------------- Our Work -- */

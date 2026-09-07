@@ -23,7 +23,12 @@ export const site = {
    * Set to "" to show heroPoster alone, which is a fine hero on its own.
    */
   heroVideo: "/media/hero-reel.mp4",
-  heroPoster: "/media/wedding/wedding-09.jpg",
+  /**
+   * The still that carries the hero on its own: it paints first, covers the
+   * film while it buffers, and is what remains if the video fails or autoplay
+   * is blocked. Swap this path to change the fallback.
+   */
+  heroPoster: "/media/wedding/hero-poster.png",
   intro:
     "Over 3+ years of dedicated experience in wedding cinematography and post-production — because every story deserves to be told beautifully.",
   email: "jangidshubh08@gmail.com",
